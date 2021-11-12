@@ -3,15 +3,18 @@
 # parse_JL_gene_tsv.py
 
 import csv
-import mysql.connector
+#import mysql.connector
 
-my_db = mysql.connector.connect(
+def connect_to_db():
+    import mysql.connector
+    my_db = mysql.connector.connect(
         host = 'localhost',
         user = 'liam',
         password = 'liam',
         database = 'mgc',
         auth_plugin = 'mysql_native_password'
-)        
+        )       
+    return my_db
 
 def sql_query(my_db):
     cursor = my_db.cursor()
@@ -26,16 +29,15 @@ def sql_query(my_db):
             contig = line[3]
             start = line[4]
             stop = line[5]
-            #print(f'{id}\t{contig}\t{start}\t{stop}')
             query = (f"select count(*) as count from cannsnp90_variants_annotated where contig= '{contig}' and (contig_pos >= {start} and contig_pos <= {stop})")
             cursor.execute(query)
             myresult = cursor.fetchall()
-            #print(query)
             for i in myresult:
                 total_var = i[0]
-                print("%s\t%s\t%s\t%s\t%s"%(id, contig, start, stop, total_var))
+                print(f'{id}\t{contig}\t{start}\t{stop}\t{total_var}')
 def main():
+    connect_to_db()
     sql_query(my_db)
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     main()
