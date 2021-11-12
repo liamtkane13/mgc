@@ -36,7 +36,7 @@ def sql_query(my_db):
                 total_var = i[0]
                 print(f'{id}\t{contig}\t{start}\t{stop}\t{total_var}')
 def main():
-    connect_to_db()
+    my_db = connect_to_db()
     sql_query(my_db)
 
 if __name__ == '__main__':
