@@ -1,0 +1,3 @@
+Parsing an assembly file into Hi-C scaffolds
+
+In this exercise, you will parse an assembly file from the output of 3d-DNA  and output which scaffolds each of the contigs map to.  The assembly file has all the information in it and this script glues it together in a more human-readable file format that can be easily imported into Excel.
