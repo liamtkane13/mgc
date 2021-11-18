@@ -2,8 +2,13 @@
 
 # parse_JL_gene_tsv.py
 
+import argparse
+import sys
 import csv
-#import mysql.connector
+
+parser = argparse.ArgumentParser(description='Open gene list infile and search Kannapedia for variants in genes in infile.')
+parser.add_argument('-i', '--infile', help='Gene list to query', required=True,dest='infile')
+args = parser.parse_args()
 
 def connect_to_db():
     import mysql.connector
@@ -14,14 +19,23 @@ def connect_to_db():
         database = 'mgc',
         auth_plugin = 'mysql_native_password'
         )       
-    return my_db
+    return(my_db)
+
+def infile_list():
+    infile_counter = 0
+    with open(args.infile, 'r') as infile:
+        for line in infile:
+            infile_counter += 1
+            if infile_counter == 1:
+                continue
+            print(line)
 
 def sql_query(my_db):
     cursor = my_db.cursor()
     counter = 0
     with open('CoGe_id55184_Cannabis_sativa_Jamaican_Lion_Jamaican_Lion_Mother_Sorted_JLion_Final_061119.highQuality_models.EFWonly.tsv') as file:
-        infile = csv.reader(file, delimiter="\t")
-        for line in infile:
+        gene_file = csv.reader(file, delimiter="\t")
+        for line in gene_file:
             counter += 1
             if counter == 1: #skip header
                 continue
@@ -37,6 +51,7 @@ def sql_query(my_db):
                 print(f'{id}\t{contig}\t{start}\t{stop}\t{total_var}')
 def main():
     my_db = connect_to_db()
+    infile_list()
     sql_query(my_db)
 
 if __name__ == '__main__':
