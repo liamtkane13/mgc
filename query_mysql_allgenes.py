@@ -23,12 +23,15 @@ def connect_to_db():
 
 def infile_list():
     infile_counter = 0
+    infile_list = []
     with open(args.infile, 'r') as infile:
         for line in infile:
             infile_counter += 1
             if infile_counter == 1:
                 continue
-            print(line)
+            line = line.strip('\n')
+            infile_list.append(line)
+            print(infile_list)
 
 def sql_query(my_db):
     cursor = my_db.cursor()
@@ -52,7 +55,7 @@ def sql_query(my_db):
 def main():
     my_db = connect_to_db()
     infile_list()
-    sql_query(my_db)
+#    sql_query(my_db)
 
 if __name__ == '__main__':
     main()
