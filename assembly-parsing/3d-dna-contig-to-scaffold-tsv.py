@@ -9,24 +9,35 @@ parser = argparse.ArgumentParser(description='Open an assembly file and map cont
 parser.add_argument('-i', '--infile', help='Assembly file to map', required=True,dest='infile')
 args = parser.parse_args()
 
+contig_dict = {}
+#value_dict = {}
+
 def parse_contigs():
-    contig_list = []
-    scaffold_list = []
+    counter = 0
     with open(args.infile, 'r') as infile:
         for line in infile:
             if line.startswith('>'):
-                contig = line.strip('>')
-                contigs = contig.split(' ')
-                contig_list.append(contigs)
-#            print(contig_list)
-            for line in contig_list:
-                contig_name = line[0]
-                contig_number = line[1]
-                contig_length = line[2]
-            print(f'{contig_name}\t{contig_number}\t{contig_length}')
+                contig_array = line.strip('>').split(' ')
+                name = contig_array[0]
+                number = contig_array[1]
+                length = contig_array[2]
+                contig_dict[number] = name 
+#                value_dict[name] = int(number)
+            else:
+                scaffolds = line.split(' ')
+                counter +=1
+        return contig_dict
+        print(counter)
+#        return value_dict
+
+#def align_scaffolds():
+#    with open(args.infile, 'r') as infile:
 
 def main():
     parse_contigs()
+    print(contig_dict)
+#    print(value_dict)
+
 
 if __name__ == '__main__':
     main()
