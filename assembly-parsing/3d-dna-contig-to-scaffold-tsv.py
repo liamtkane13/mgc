@@ -11,10 +11,12 @@ args = parser.parse_args()
 
 contig_dict = {}
 
+
 def parse_contigs():
     counter = 0
     with open(args.infile, 'r') as infile:
-        for line in infile:
+        for lines in infile:
+            line = lines.rstrip('\n')
             if line.startswith('>'):
                 contig_array = line.strip('>').split(' ')
                 name = contig_array[0]
@@ -25,8 +27,10 @@ def parse_contigs():
             else:
                 scaffolds = line.split(' ')
                 counter +=1
-#            print(scaffolds)
+                print(scaffolds)
+        print(counter)    
         return contig_dict
+    
 
 
 
@@ -35,7 +39,8 @@ def parse_contigs():
 
 def main():
     parse_contigs()
-    print(contig_dict)
+#    print(contig_dict)
+#    print(counter)
 
 
 if __name__ == '__main__':
