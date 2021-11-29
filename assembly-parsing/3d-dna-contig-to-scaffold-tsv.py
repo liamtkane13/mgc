@@ -10,7 +10,6 @@ parser.add_argument('-i', '--infile', help='Assembly file to map', required=True
 args = parser.parse_args()
 
 contig_dict = {}
-#value_dict = {}
 
 def parse_contigs():
     counter = 0
@@ -22,13 +21,14 @@ def parse_contigs():
                 number = contig_array[1]
                 length = contig_array[2]
                 contig_dict[number] = name 
-#                value_dict[name] = int(number)
+                
             else:
                 scaffolds = line.split(' ')
                 counter +=1
+#            print(scaffolds)
         return contig_dict
-        print(counter)
-#        return value_dict
+
+
 
 #def align_scaffolds():
 #    with open(args.infile, 'r') as infile:
@@ -36,7 +36,6 @@ def parse_contigs():
 def main():
     parse_contigs()
     print(contig_dict)
-#    print(value_dict)
 
 
 if __name__ == '__main__':
