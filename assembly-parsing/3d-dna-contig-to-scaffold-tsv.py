@@ -10,7 +10,7 @@ parser.add_argument('-i', '--infile', help='Assembly file to map', required=True
 args = parser.parse_args()
 
 contig_dict = {}
-
+scaffold_list = []
 
 def parse_contigs():
     counter = 0
@@ -26,22 +26,22 @@ def parse_contigs():
                 
             else:
                 scaffolds = line.split(' ')
+                scaffold_list.append(scaffolds)
                 counter +=1
-                print(scaffolds)
-        print(counter)    
-        return contig_dict
+
+
+
+def align_scaffolds(dict, list):
+    for item in list:
+        if item in dict.keys():
+            print(item)
     
-
-
-
-#def align_scaffolds():
-#    with open(args.infile, 'r') as infile:
 
 def main():
     parse_contigs()
 #    print(contig_dict)
-#    print(counter)
-
+#    print(scaffold_list)
+    align_scaffolds(contig_dict, scaffold_list)
 
 if __name__ == '__main__':
     main()
