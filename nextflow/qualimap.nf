@@ -27,7 +27,7 @@ process qualimap {
     container 'liamtkane/qualimap'
 
     input:
-    set file(bam) from params."bam"
+    file(bam) from file(params."bam")
 
     script:
     """
