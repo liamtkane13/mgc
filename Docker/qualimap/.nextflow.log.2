@@ -1,0 +1,103 @@
+Apr-04 17:15:42.047 [main] DEBUG nextflow.cli.Launcher - $> nextflow run qualimap.nf --bam /Users/liamkane/software/liam_git/Docker/qualimap/sample.bam -with-docker liamtkane/qualimap
+Apr-04 17:15:42.151 [main] INFO  nextflow.cli.CmdRun - N E X T F L O W  ~  version 21.10.6
+Apr-04 17:15:42.180 [main] INFO  nextflow.cli.CmdRun - Launching `qualimap.nf` [deadly_pare] - revision: 7a223ead56
+Apr-04 17:15:42.292 [main] DEBUG nextflow.config.ConfigBuilder - Enabling execution in Docker container as requested by cli option `-with-docker liamtkane/qualimap`
+Apr-04 17:15:42.316 [main] DEBUG nextflow.plugin.PluginsFacade - Setting up plugin manager > mode=prod; plugins-dir=/Users/liamkane/.nextflow/plugins
+Apr-04 17:15:42.318 [main] DEBUG nextflow.plugin.PluginsFacade - Plugins default=[]
+Apr-04 17:15:42.333 [main] INFO  org.pf4j.DefaultPluginStatusProvider - Enabled plugins: []
+Apr-04 17:15:42.334 [main] INFO  org.pf4j.DefaultPluginStatusProvider - Disabled plugins: []
+Apr-04 17:15:42.339 [main] INFO  org.pf4j.DefaultPluginManager - PF4J version 3.4.1 in 'deployment' mode
+Apr-04 17:15:42.353 [main] INFO  org.pf4j.AbstractPluginManager - No plugins
+Apr-04 17:15:42.422 [main] DEBUG nextflow.Session - Session uuid: 327b0d04-d7a1-4652-89da-8af3fdc591d8
+Apr-04 17:15:42.423 [main] DEBUG nextflow.Session - Run name: deadly_pare
+Apr-04 17:15:42.425 [main] DEBUG nextflow.Session - Executor pool size: 8
+Apr-04 17:15:42.461 [main] DEBUG nextflow.cli.CmdRun - 
+  Version: 21.10.6 build 5660
+  Created: 21-12-2021 16:55 UTC (11:55 EDT)
+  System: Mac OS X 10.15.7
+  Runtime: Groovy 3.0.9 on OpenJDK 64-Bit Server VM 12.0.2+10
+  Encoding: UTF-8 (UTF-8)
+  Process: 21400@MGC-MACBOOK-PRO-2.local [127.0.0.1]
+  CPUs: 8 - Mem: 16 GB (643 MB) - Swap: 2 GB (891.2 MB)
+Apr-04 17:15:42.480 [main] DEBUG nextflow.Session - Work-dir: /Users/liamkane/software/liam_git/Docker/qualimap/work [Mac OS X]
+Apr-04 17:15:42.481 [main] DEBUG nextflow.Session - Script base path does not exist or is not a directory: /Users/liamkane/software/liam_git/Docker/qualimap/bin
+Apr-04 17:15:42.492 [main] DEBUG nextflow.executor.ExecutorFactory - Extension executors providers=[]
+Apr-04 17:15:42.506 [main] DEBUG nextflow.Session - Observer factory: DefaultObserverFactory
+Apr-04 17:15:42.540 [main] DEBUG nextflow.util.CustomThreadPool - Creating default thread pool > poolSize: 9; maxThreads: 1000
+Apr-04 17:15:42.620 [main] DEBUG nextflow.Session - Session start invoked
+Apr-04 17:15:43.410 [main] DEBUG nextflow.script.ScriptRunner - > Launching execution
+Apr-04 17:15:43.487 [main] DEBUG nextflow.util.CustomThreadPool - Creating default thread pool > poolSize: 9; maxThreads: 1000
+Apr-04 17:15:43.635 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: null
+Apr-04 17:15:43.636 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'local'
+Apr-04 17:15:43.641 [main] DEBUG nextflow.executor.Executor - [warm up] executor > local
+Apr-04 17:15:43.646 [main] DEBUG n.processor.LocalPollingMonitor - Creating local task monitor for executor 'local' > cpus=8; memory=16 GB; capacity=8; pollInterval=100ms; dumpInterval=5m
+Apr-04 17:15:43.703 [main] WARN  nextflow.processor.TaskProcessor - Input `set` must define at least two component -- Check process `qualimap`
+Apr-04 17:15:43.756 [main] DEBUG nextflow.Session - Workflow process names [dsl1]: qualimap
+Apr-04 17:15:43.757 [main] DEBUG nextflow.script.ScriptRunner - > Await termination 
+Apr-04 17:15:43.757 [main] DEBUG nextflow.Session - Session await
+Apr-04 17:15:43.790 [Actor Thread 5] WARN  nextflow.processor.TaskProcessor - Input tuple does not match input set cardinality declared by process `qualimap` -- offending value: [sample, [/Users/liamkane/software/liam_git/Docker/qualimap/sample.bam]]
+Apr-04 17:15:43.949 [Task submitter] DEBUG nextflow.executor.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Apr-04 17:15:43.969 [Task submitter] INFO  nextflow.Session - [2e/b960ba] Submitted process > qualimap (1)
+Apr-04 17:15:45.531 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 1; name: qualimap (1); status: COMPLETED; exit: 255; error: -; workDir: /Users/liamkane/software/liam_git/Docker/qualimap/work/2e/b960ba6a1b0be9730189fffd463683]
+Apr-04 17:15:45.561 [Task monitor] ERROR nextflow.processor.TaskProcessor - Error executing process > 'qualimap (1)'
+
+Caused by:
+  Process `qualimap (1)` terminated with an error exit status (255)
+
+Command executed:
+
+  qualimap bamqc -bam input.1 -outdir out/ -outformat HTML
+
+Command exit status:
+  255
+
+Command output:
+  Java memory size is set to 1200M
+  Launching application...
+  
+  QualiMap v.2.2.1
+  Built on 2016-10-03 18:14
+  
+  Selected tool: bamqc
+  Available memory (Mb): 32
+  Max memory (Mb): 1216
+  Starting bam qc....
+  Loading sam header...
+  Loading locator...
+  Loading reference...
+  Number of windows: 400, effective number of windows: 0
+  Chunk of reads size: 1000
+  Number of threads: 1
+  Total processed windows:0
+  Number of reads: 0
+  Number of valid reads: 0
+  Number of correct strand reads:0
+  Mon Apr 04 21:15:45 GMT 2022		WARNING	SAMRecordParser marked 1 problematic reads.
+  
+  Inside of regions...
+  Num mapped reads: 0
+  Num mapped first of pair: 0
+  Num mapped second of pair: 0
+  Num singletons: 0
+  Time taken to analyze reads: 0
+  Mon Apr 04 21:15:45 GMT 2022		WARNING	Cleanup output dir
+
+Command error:
+  OpenJDK 64-Bit Server VM warning: ignoring option MaxPermSize=1024m; support was removed in 8.0
+  Failed to run bamqc
+  java.lang.RuntimeException: The BAM file is empty or corrupt
+  	at org.bioinfo.ngs.qc.qualimap.process.BamStatsAnalysis.run(BamStatsAnalysis.java:520)
+  	at org.bioinfo.ngs.qc.qualimap.main.BamQcTool.execute(BamQcTool.java:242)
+  	at org.bioinfo.ngs.qc.qualimap.main.NgsSmartTool.run(NgsSmartTool.java:190)
+  	at org.bioinfo.ngs.qc.qualimap.main.NgsSmartMain.main(NgsSmartMain.java:111)
+
+Work dir:
+  /Users/liamkane/software/liam_git/Docker/qualimap/work/2e/b960ba6a1b0be9730189fffd463683
+
+Tip: view the complete command output by changing to the process work dir and entering the command `cat .command.out`
+Apr-04 17:15:45.570 [main] DEBUG nextflow.Session - Session await > all process finished
+Apr-04 17:15:45.570 [Task monitor] DEBUG nextflow.Session - Session aborted -- Cause: Process `qualimap (1)` terminated with an error exit status (255)
+Apr-04 17:15:45.591 [main] DEBUG nextflow.Session - Session await > all barriers passed
+Apr-04 17:15:45.602 [main] DEBUG nextflow.trace.WorkflowStatsObserver - Workflow completed > WorkflowStats[succeededCount=0; failedCount=1; ignoredCount=0; cachedCount=0; pendingCount=0; submittedCount=0; runningCount=0; retriesCount=0; abortedCount=0; succeedDuration=0ms; failedDuration=1.5s; cachedDuration=0ms;loadCpus=0; loadMemory=0; peakRunning=1; peakCpus=1; peakMemory=0; ]
+Apr-04 17:15:45.805 [main] DEBUG nextflow.CacheDB - Closing CacheDB done
+Apr-04 17:15:45.818 [main] DEBUG nextflow.script.ScriptRunner - > Execution complete -- Goodbye
