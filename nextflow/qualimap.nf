@@ -21,16 +21,19 @@ if (params.help){
     exit 0
 }
 
+bam_files = Channel.fromPath(params."bam")
+				   .map {it -> [it.simpleName, it]}
+
 
 process qualimap {
 
     container 'liamtkane/qualimap'
 
     input:
-    file(bam) from file(params."bam")
+    set val(sample_id), file(bam) from bam_files
 
     script:
     """
-    qualimap bamqc -bam ${bam} -outdir out/ -outformat HTML
+    qualimap bamqc -bam ${bam} -outdir ${sample_id}/ -outformat HTML
     """
 }
