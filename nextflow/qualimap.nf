@@ -29,8 +29,13 @@ process qualimap {
 
     container 'liamtkane/qualimap'
 
+    publishDir 'output/', mode: 'copy', overwrite: true
+
     input:
     set val(sample_id), file(bam) from bam_files
+
+    output:
+    file"${sample_id}" into output
 
     script:
     """
