@@ -11,4 +11,4 @@ RUN cd /opt/ && \
 RUN cd /opt/ && \
     unzip fastqc_v0.11.9.zip
 RUN chmod u+x /opt/FastQC/fastqc
-COPY P.Cubensis_0.5.R1.fastq /opt/P.Cubensis_0.5.R1.fastq
+#COPY P.Cubensis_0.5.R1.fastq /opt/P.Cubensis_0.5.R1.fastq
