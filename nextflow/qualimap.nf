@@ -8,6 +8,7 @@ def helpMessage() {
     Usage:
        Mandatory arguments:
            --bam            BAM file for QC
+           --out_dir        Output Directory (for things that aren't intermediate files to keep)
     """.stripIndent()
 }
 
@@ -29,16 +30,16 @@ process qualimap {
 
     container 'liamtkane/qualimap'
 
-    publishDir 'output/', mode: 'copy', overwrite: true
+    publishDir "${params.out_dir}/qualimap/${sample_id}", mode: 'copy', overwrite: true, pattern: "*/*"
 
     input:
     set val(sample_id), file(bam) from bam_files
 
     output:
-    file"${sample_id}" into output
+    file ("${sample_id}/*") into output
 
     script:
     """
-    qualimap bamqc -bam ${bam} -outdir ${sample_id}/ -outformat HTML
+    qualimap bamqc -bam ${bam} -outdir $sample_id -outformat HTML
     """
 }

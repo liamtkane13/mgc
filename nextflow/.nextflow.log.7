@@ -1,0 +1,73 @@
+May-18 14:56:55.545 [main] DEBUG nextflow.cli.Launcher - $> nextflow qualimap.nf --bam '/Users/liamkane/software/bam_examples/*.bam' --out_dir hello
+May-18 14:56:55.626 [main] INFO  nextflow.cli.CmdRun - N E X T F L O W  ~  version 21.10.6
+May-18 14:56:55.665 [main] INFO  nextflow.cli.CmdRun - Launching `qualimap.nf` [nauseous_banach] - revision: 918ad62cb5
+May-18 14:56:55.777 [main] DEBUG nextflow.plugin.PluginsFacade - Setting up plugin manager > mode=prod; plugins-dir=/Users/liamkane/.nextflow/plugins
+May-18 14:56:55.780 [main] DEBUG nextflow.plugin.PluginsFacade - Plugins default=[]
+May-18 14:56:55.796 [main] INFO  org.pf4j.DefaultPluginStatusProvider - Enabled plugins: []
+May-18 14:56:55.797 [main] INFO  org.pf4j.DefaultPluginStatusProvider - Disabled plugins: []
+May-18 14:56:55.801 [main] INFO  org.pf4j.DefaultPluginManager - PF4J version 3.4.1 in 'deployment' mode
+May-18 14:56:55.815 [main] INFO  org.pf4j.AbstractPluginManager - No plugins
+May-18 14:56:55.895 [main] DEBUG nextflow.Session - Session uuid: 2ef3ded9-5fb2-4cee-a931-229225c017ee
+May-18 14:56:55.895 [main] DEBUG nextflow.Session - Run name: nauseous_banach
+May-18 14:56:55.897 [main] DEBUG nextflow.Session - Executor pool size: 8
+May-18 14:56:55.999 [main] DEBUG nextflow.cli.CmdRun - 
+  Version: 21.10.6 build 5660
+  Created: 21-12-2021 16:55 UTC (11:55 EDT)
+  System: Mac OS X 10.15.7
+  Runtime: Groovy 3.0.9 on OpenJDK 64-Bit Server VM 12.0.2+10
+  Encoding: UTF-8 (UTF-8)
+  Process: 39806@MGC-MACBOOK-PRO-2.local [10.100.20.59]
+  CPUs: 8 - Mem: 16 GB (1.5 GB) - Swap: 6 GB (1.6 GB)
+May-18 14:56:56.018 [main] DEBUG nextflow.Session - Work-dir: /Users/liamkane/software/liam_git/nextflow/work [Mac OS X]
+May-18 14:56:56.019 [main] DEBUG nextflow.Session - Script base path does not exist or is not a directory: /Users/liamkane/software/liam_git/nextflow/bin
+May-18 14:56:56.032 [main] DEBUG nextflow.executor.ExecutorFactory - Extension executors providers=[]
+May-18 14:56:56.046 [main] DEBUG nextflow.Session - Observer factory: DefaultObserverFactory
+May-18 14:56:56.083 [main] DEBUG nextflow.util.CustomThreadPool - Creating default thread pool > poolSize: 9; maxThreads: 1000
+May-18 14:56:56.196 [main] DEBUG nextflow.Session - Session start invoked
+May-18 14:56:57.352 [main] DEBUG nextflow.script.ScriptRunner - > Launching execution
+May-18 14:56:57.425 [PathVisitor-1] DEBUG nextflow.file.PathVisitor - files for syntax: glob; folder: /Users/liamkane/software/bam_examples/; pattern: *.bam; options: [:]
+May-18 14:56:57.461 [main] DEBUG nextflow.util.CustomThreadPool - Creating default thread pool > poolSize: 9; maxThreads: 1000
+May-18 14:56:57.558 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: null
+May-18 14:56:57.558 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'local'
+May-18 14:56:57.565 [main] DEBUG nextflow.executor.Executor - [warm up] executor > local
+May-18 14:56:57.573 [main] DEBUG n.processor.LocalPollingMonitor - Creating local task monitor for executor 'local' > cpus=8; memory=16 GB; capacity=8; pollInterval=100ms; dumpInterval=5m
+May-18 14:56:57.674 [main] DEBUG nextflow.Session - Workflow process names [dsl1]: qualimap
+May-18 14:56:57.675 [main] DEBUG nextflow.script.ScriptRunner - > Await termination 
+May-18 14:56:57.675 [main] DEBUG nextflow.Session - Session await
+May-18 14:56:57.850 [Task submitter] DEBUG nextflow.executor.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+May-18 14:56:57.855 [Task submitter] INFO  nextflow.Session - [7e/0ffa55] Submitted process > qualimap (3)
+May-18 14:56:57.861 [Task submitter] DEBUG nextflow.executor.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+May-18 14:56:57.861 [Task submitter] INFO  nextflow.Session - [38/c06270] Submitted process > qualimap (2)
+May-18 14:56:57.869 [Task submitter] DEBUG nextflow.executor.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+May-18 14:56:57.870 [Task submitter] INFO  nextflow.Session - [39/cb92cf] Submitted process > qualimap (1)
+May-18 14:56:58.092 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 3; name: qualimap (3); status: COMPLETED; exit: 127; error: -; workDir: /Users/liamkane/software/liam_git/nextflow/work/7e/0ffa55b1550221ee741063244a7dd8]
+May-18 14:56:58.136 [Task monitor] ERROR nextflow.processor.TaskProcessor - Error executing process > 'qualimap (3)'
+
+Caused by:
+  Process `qualimap (3)` terminated with an error exit status (127)
+
+Command executed:
+
+  qualimap bamqc -bam PSP10011_sample_50.bam -outdir PSP10011_sample_50/ -outformat HTML
+
+Command exit status:
+  127
+
+Command output:
+  (empty)
+
+Command error:
+  .command.sh: line 2: qualimap: command not found
+
+Work dir:
+  /Users/liamkane/software/liam_git/nextflow/work/7e/0ffa55b1550221ee741063244a7dd8
+
+Tip: when you have fixed the problem you can continue the execution adding the option `-resume` to the run command line
+May-18 14:56:58.143 [Task monitor] DEBUG nextflow.Session - Session aborted -- Cause: Process `qualimap (3)` terminated with an error exit status (127)
+May-18 14:56:58.160 [main] DEBUG nextflow.Session - Session await > all process finished
+May-18 14:56:58.161 [main] DEBUG nextflow.Session - Session await > all barriers passed
+May-18 14:56:58.162 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 2; name: qualimap (2); status: COMPLETED; exit: 127; error: -; workDir: /Users/liamkane/software/liam_git/nextflow/work/38/c062703240f89542f4ae88078dc742]
+May-18 14:56:58.164 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 1; name: qualimap (1); status: COMPLETED; exit: 127; error: -; workDir: /Users/liamkane/software/liam_git/nextflow/work/39/cb92cf373b172a1c1801c7d070afeb]
+May-18 14:56:58.171 [main] DEBUG nextflow.trace.WorkflowStatsObserver - Workflow completed > WorkflowStats[succeededCount=0; failedCount=3; ignoredCount=0; cachedCount=0; pendingCount=0; submittedCount=0; runningCount=0; retriesCount=0; abortedCount=0; succeedDuration=0ms; failedDuration=696ms; cachedDuration=0ms;loadCpus=0; loadMemory=0; peakRunning=3; peakCpus=3; peakMemory=0; ]
+May-18 14:56:58.360 [main] DEBUG nextflow.CacheDB - Closing CacheDB done
+May-18 14:56:58.372 [main] DEBUG nextflow.script.ScriptRunner - > Execution complete -- Goodbye
