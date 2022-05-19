@@ -4,7 +4,6 @@
 
 import os 
 import subprocess
-from subprocess import Popen, PIPE
 
 
 
@@ -33,10 +32,13 @@ def run_qualimap(sample_list):
         subprocess.check_output(['bash', '-c', download_process])
 
         i_name = i.split('.')[0]
-        qualimap_process = (f'qualimap bamqc -bam {i} -outdir {i_name} -outformat HTML')
+        qualimap_process = (f'qualimap bamqc -bam {i} -outdir {i_name} -outformat HTML -nt 4')
         subprocess.check_output(['bash', '-c', qualimap_process])
 
-        delete_process = (f'rm {i}')
+        sync_process = (f'aws s3 sync {i_name} s3://mgcdata/SS2/qualimap/')
+        subprocess.check_output(['bash', '-c', sync_process])
+
+        delete_process = (f'rm {i_name}*')
         subprocess.check_output(['bash', '-c', delete_process])
 
         
