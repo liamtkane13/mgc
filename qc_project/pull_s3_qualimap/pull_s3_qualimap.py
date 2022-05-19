@@ -17,6 +17,14 @@ def make_rsp_list():
 
     bam_list = []
     finished_bam_list = []
+    todo_bam_list = []
+
+    with open('done_bam_list.txt') as file1:
+        for line in file1:
+            tag = line.split(' ')[-1:]
+            for x in tag:
+                finished_tag = x.strip('/\n')
+                finished_bam_list.append(finished_tag)
 
     with open('todo_bam_list.txt') as file:
         for line in file:
@@ -28,8 +36,9 @@ def make_rsp_list():
                     if "bam" in i:
                         it = i.strip('.bam\n')
                         bam_list.append(it)
-    return bam_list
-
+    todo_bam_list = list(set(bam_list)^set(finished_bam_list))
+    
+    return todo_bam_list
 
 def run_qualimap(sample_list):
 
@@ -56,8 +65,8 @@ def run_qualimap(sample_list):
 
 def main():
     make_accession_files()
-#    bam_list = make_rsp_list()
-#    run_qualimap(bam_list)
+    todo_bam_list = make_rsp_list()
+    run_qualimap(todo_bam_list)
 
 
 
