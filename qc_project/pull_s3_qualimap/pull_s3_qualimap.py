@@ -47,7 +47,7 @@ def run_qualimap(sample_list):
         download_process = (f'aws s3 cp s3://mgcdata/SS2/bams/public/{i}.bam .') 
         subprocess.check_output(['bash', '-c', download_process])
 
-        qualimap_process = (f'qualimap bamqc -bam {i}.bam -outdir {i} -outformat HTML -nt 4')
+        qualimap_process = (f'qualimap bamqc -bam {i}.bam -outdir {i} -outformat HTML -nt 8')
         subprocess.check_output(['bash', '-c', qualimap_process])
 
         sync_process = (f'aws s3 sync {i} s3://mgcdata/SS2/qualimap/')
