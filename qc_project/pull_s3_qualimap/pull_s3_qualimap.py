@@ -50,15 +50,11 @@ def run_qualimap(sample_list):
         qualimap_process = (f'qualimap bamqc -bam {i}.bam -outdir {i} -outformat HTML -nt 8')
         subprocess.check_output(['bash', '-c', qualimap_process])
 
-        sync_process = (f'aws s3 sync {i} s3://mgcdata/SS2/qualimap/')
+        sync_process = (f'aws s3 sync {i} s3://mgcdata/SS2/qualimap/{i}/')
         subprocess.check_output(['bash', '-c', sync_process])
 
-        delete_process = (f'rm {i}*')
+        delete_process = (f'rm -r {i}*')
         subprocess.check_output(['bash', '-c', delete_process])
-
-
-        print('quit')
-        quit()
 
         
 
