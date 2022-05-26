@@ -30,7 +30,7 @@ process quast {
 
     container 'liamtkane/quast'
 
-    publishDir "${params.out_dir}/quast/${sample_id}", mode: 'copy', overwrite: true, pattern: "*/*"
+    publishDir "${params.out_dir}/quast/", mode: 'copy', overwrite: true, pattern: "*/*"
 
     input:
     set val(sample_id), file(fasta) from fasta_files
