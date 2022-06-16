@@ -24,7 +24,7 @@ if (params.help){
 ///input_directory = Channel.fromPath(params."in_dir")
 ///				   .map {it -> [it.simpleName, it]}
 
-input_dir = Channel.fromPath(params."in_dir")
+input_dir = Channel.fromPath(params."in_dir", type: 'dir')
 
 process multiqc {
 
