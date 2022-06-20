@@ -55,6 +55,6 @@ process canu {
 
     script:
     """
-    canu -p {prefix} genomeSize= {size} m -nanopore {fastq}
+    canu -p ${prefix} genomeSize= ${size} m -nanopore ${fastq}
     """
 }
