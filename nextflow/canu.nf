@@ -36,6 +36,10 @@ process canu {
 
     container 'greatfireball/canu'
 
+    memory '30 G'
+    
+    cpus 8
+
     publishDir "${params."out_dir"}/canu/", mode: 'copy', overwrite: true, pattern: "*/*"
 
     input:
@@ -45,6 +49,7 @@ process canu {
     file ("${sample_id}/*") into output
 
     script:
+    sample_id = fastq.name.split('/')[0]
     """
     canu -p ${params."prefix"} genomeSize= ${params."size"} m -nanopore ${fastq}
     """
