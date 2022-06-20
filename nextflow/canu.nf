@@ -27,8 +27,8 @@ if (params.help){
     exit 0
 }
 
-///fastq_files = Channel.fromPath(params."fastq")
-///				   .map {it -> [it.simpleName, it]}
+fastq_files = Channel.fromPath(params."fastq")
+				   .map {it -> [it.simpleName, it]}
 
 ///size = Channel.fromPath(params."size")
 ///                   .map {it -> [it.simpleName, it]}
@@ -47,8 +47,8 @@ process canu {
 
     input:
     set val(sample_id), file(fastq) from fastq_files
-    val(size) from size
-    val(prefix) from prefix
+///    val(size) from size
+///    val(prefix) from prefix
 
     output:
     file ("${sample_id}/*") into output
