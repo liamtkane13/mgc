@@ -51,6 +51,6 @@ process canu {
     script:
     sample_id = fastq.name.split('/')[0]
     """
-    canu -p ${params."prefix"} genomeSize=${params."size"}m -nanopore ${fastq}
+    canu -p ${params."prefix"} genomeSize=${params."size"}m -nanopore-raw ${fastq}
     """
 }
