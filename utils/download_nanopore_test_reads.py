@@ -19,6 +19,7 @@ def make_download_file():
                         ftp.append(str(i.split('"')[3]))
         return ftp
 
+
                    
 
 def make_org_lists(ftp_links):
@@ -42,12 +43,36 @@ def make_org_lists(ftp_links):
         if 'MRSA' in i:
             mrsa_ftp.append(i)
             
-    
+    return ecoli_ftp, klebsiella_ftp, pseudo_ftp, mrsa_ftp    
+
+
+
+
+def file_transfer(list_1, list_2, list_3, list_4):
+
+    for i in list_1:
+        command_1 = (f'wget {i} -P /Dragen/ONT/NIHR-data/fastq/E-coli/')
+        subprocess.check_output(['bash', '-c', command_1])
+      
+    for i in list_2:
+        command_2 = (f'wget {i} -P /Dragen/ONT/NIHR-data/fastq/Klebsiella-pneumoniae/')
+        subprocess.check_output(['bash', '-c', command_2])
+
+    for i in list_3:
+        command_3 = (f'wget {i} -P /Dragen/ONT/NIHR-data/fastq/Pseudomonas-aeruginosa-PAO1/')
+        subprocess.check_output(['bash', '-c', command_3])
+
+    for i in list_4:
+        command_4 = (f'wget {i} -P /Dragen/ONT/NIHR-data/fastq/Staphylococcus-aureus-MRSA252/')
+        subprocess.check_output(['bash', '-c', command_4])
+
+
 
 
 def main():
     ftp = make_download_file()
-    make_org_lists(ftp)
+    ecoli_ftp, klebsiella_ftp, pseudo_ftp, mrsa_ftp = make_org_lists(ftp)
+    file_transfer(ecoli_ftp, klebsiella_ftp, pseudo_ftp, mrsa_ftp)
 
 if __name__ == '__main__':
     main()
