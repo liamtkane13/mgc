@@ -51,19 +51,19 @@ def make_org_lists(ftp_links):
 def file_transfer(list_1, list_2, list_3, list_4):
 
     for i in list_1:
-        command_1 = (f'wget {i} -P /Dragen/ONT/NIHR-data/fastq/E-coli/')
+        command_1 = (f'wget ftp://{i} -P /Dragen/ONT/NIHR-data/fastq/E-coli/')
         subprocess.check_output(['bash', '-c', command_1])
       
     for i in list_2:
-        command_2 = (f'wget {i} -P /Dragen/ONT/NIHR-data/fastq/Klebsiella-pneumoniae/')
+        command_2 = (f'wget ftp://{i} -P /Dragen/ONT/NIHR-data/fastq/Klebsiella-pneumoniae/')
         subprocess.check_output(['bash', '-c', command_2])
 
     for i in list_3:
-        command_3 = (f'wget {i} -P /Dragen/ONT/NIHR-data/fastq/Pseudomonas-aeruginosa-PAO1/')
+        command_3 = (f'wget ftp://{i} -P /Dragen/ONT/NIHR-data/fastq/Pseudomonas-aeruginosa-PAO1/')
         subprocess.check_output(['bash', '-c', command_3])
 
     for i in list_4:
-        command_4 = (f'wget {i} -P /Dragen/ONT/NIHR-data/fastq/Staphylococcus-aureus-MRSA252/')
+        command_4 = (f'wget ftp://{i} -P /Dragen/ONT/NIHR-data/fastq/Staphylococcus-aureus-MRSA252/')
         subprocess.check_output(['bash', '-c', command_4])
 
 
