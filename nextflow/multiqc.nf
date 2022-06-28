@@ -30,7 +30,7 @@ process multiqc {
 
     container 'medicinalgenomics/multiqc'
 
-    publishDir "${sample_id}_multiqc/", mode: 'copy', overwrite: true, pattern: "*/*"
+    publishDir "multiqc_output/", mode: 'copy', overwrite: true, pattern: "*/*"
 
     input:
     path(qc_file) from input_dir
