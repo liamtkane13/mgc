@@ -50,6 +50,6 @@ process flye {
     script:
     sample_id = fastq.name.split('/')[0]
     """
-    flye --nano-raw ${fastq} --out-dir ${params."out_dir"}
+    flye --nano-hq ${fastq} --out-dir ${params."out_dir"}
     """
 }
