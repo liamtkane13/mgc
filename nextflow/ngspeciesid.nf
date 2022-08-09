@@ -45,10 +45,10 @@ process ngspeciesid {
     set val(sample_id), file(fastq) from fastq_files
 
     output:
-    file ("${sample_id}/*") into output
+    file ("$sample_id/*") optional true into output
 
     script:
-    sample_id = fastq.name.split('/')[0]
+
     """
     NGSpeciesID --ont --sample_size 300 --m 750 --s 50 --consensus --medaka --fastq ${fastq} --outfolder ${params."out_dir"}
     """
