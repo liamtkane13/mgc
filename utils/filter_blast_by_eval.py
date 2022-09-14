@@ -4,6 +4,7 @@
 
 import sys
 import argparse
+import decimal
 
 parser = argparse.ArgumentParser(description='Open a BLAST output file, filter hits by maximum e-value and return requested number of hits')
 parser.add_argument('-i', '--infiles', nargs = '+', help = 'BLAST file to query', required = True, dest = 'infiles')
@@ -12,13 +13,21 @@ parser.add_argument('-n', '--num_hits', help = 'Number of hits requested', requi
 args = parser.parse_args()
 
 def parse_blast_files(files, eval, numhits):
-    blast_dict = {}
+    blast_list = []
+    evals_list = []
     for file in files:
         with open(file, 'r') as file:
             for line in file:
-                line = line.split('\t')
-                e_vals = line[10]
-                print(e_vals)
+                linecomp = line.split('\t')
+                blast_list.append(linecomp)
+                e_val = linecomp[10]
+                e_val = float(e_val)
+                float_e_val = decimal.Decimal(e_val)
+                print(e_val)
+                print(float_e_val)
+#                if float_e_val < int(eval):
+#                    print(float_e_val)
+
 
 def main():
     infiles = args.infiles
