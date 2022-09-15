@@ -32,8 +32,8 @@ def parse_blast_files(files, eval):
                 if e_val < float(eval):
                     filtered_e_val = str(e_val)
 
-                    if filtered_e_val in linecomp:
-                        blast_list.append(linecomp)
+                    if filtered_e_val in line:
+                        blast_list.append(line)
 
             return blast_list
 
@@ -42,7 +42,8 @@ def parse_blast_files(files, eval):
 def sort_and_subsample_results(data_list, numhits):
     data_list.sort(key = sort_key)
     top_hits_requested = data_list[0:numhits]
-    print(top_hits_requested)
+    for i in top_hits_requested:
+        print(i)
 
 
 
