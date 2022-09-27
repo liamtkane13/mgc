@@ -44,18 +44,20 @@ def parse_blast_files(files, eval):
 
 
 def sort_and_subsample_results(data_list1, data_list2, numhits):
+
     data_list1.sort(key = sort_key)
     top_hits_requested = data_list2[0:numhits]
-#    for i in top_hits_requested:
-#        print(i)
-    for line in data_list1:
-        for i in top_hits_requested:
+    
+    for i in top_hits_requested:
+        counter = 0
+        for line in data_list1:
             if i in line:
-                print(line)
+                counter += 1
+                if counter < 2:
+                    print(line)
 
-
-
-
+                
+                
 
 def main():
     infiles = args.infiles
