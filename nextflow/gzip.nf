@@ -23,9 +23,6 @@ if (params.help){
 }
 
 infiles = Channel.fromPath(params."infile")
-                            .map {it -> [it.simpleName, it]}
-
-///infiles = params."infile"
 
 
 process gzip {
