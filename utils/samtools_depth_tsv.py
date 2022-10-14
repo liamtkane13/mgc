@@ -20,9 +20,8 @@ def run_samtools(files):
 		output = Popen(['bash', '-c', command], stdout=PIPE)
 		for line in output.stdout:
 			line = line.decode('utf8')
-			print(line)
-		print(output)	
-#			print(f'{sample_name}\t{ref_name}\t{line}')
+#			print(line)	
+			print(f'{sample_name}\t{ref_name}\t{line}')
 #		split_output = output.split('\n')
 #		print(split_output)
 
