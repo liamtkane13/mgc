@@ -33,9 +33,8 @@ def run_samtools(files):
 			if int(coverage) >= 10:
 				cov_10 += 1 
 			
-			print(f'{sample_name}\t{ref_name}\t{coverage}')
-			C10 = cov_10 / overall
-			print(f'{sample_name}\t{ref_name}\t{C10}')  
+		C10 = cov_10 / overall
+		print(f'{sample_name}\t{ref_name}\t{C10}')  
 
 def main():
 	infiles = args.infiles
