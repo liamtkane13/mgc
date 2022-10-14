@@ -3,7 +3,7 @@
 import argparse
 from glob import glob
 import subprocess 
-from subprocess import check_output as run
+from subprocess import Popen, PIPE
 
 parser = argparse.ArgumentParser(description='Input BAM files for samtools depth, to be output as a tsv file')
 parser.add_argument('-i', '--infiles', nargs = '+', help = 'BAM files for samtools', required = True, dest = 'infiles')
@@ -17,7 +17,7 @@ def run_samtools(files):
 		ref_name = file.split('REF_')[1].split(':')[0]
 		print(f"{sample_name}\t{file}")
 		command = (f"samtools depth -a {file}")
-		output = run(['bash', '-c', command])
+		output = Popen(['bash', '-c', command], stdout=PIPE)
 		for line in output:
 			line = line.decode('utf8')
 			print(line)
