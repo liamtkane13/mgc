@@ -14,6 +14,10 @@ def run_samtools(files):
 	for file in files:
 		sample_name = file.split('-')[0]
 		print(f"{sample_name}\t{file}")
+		command = (f"samtools depth -a {file}")
+		output = run(['bash', 'c', command])
+		for line in output:
+			print(f'{sample_name}\t{line}')
 
 def main():
 	infiles = args.infiles
