@@ -17,10 +17,11 @@ def run_samtools(files):
 		print(f"{sample_name}\t{file}")
 		command = (f"samtools depth -a {file}")
 		output = run(['bash', '-c', command])
-#		for line in output:
+		for line in output:
+			print(line)
 #			print(f'{sample_name}\t{ref_name}\t{line}')
-		split_output = output.split('\n')
-		print(split_output)
+#		split_output = output.split('\n')
+#		print(split_output)
 
 def main():
 	infiles = args.infiles
