@@ -37,8 +37,10 @@ def run_samtools(files):
 					
 			except:
 				continue		 
-			
-		C10 = cov_10 / overall
+		if overall > 0:		
+			C10 = cov_10 / overall
+		else:
+			C10 = 0	
 		print(f'{sample_name}\t{ref_name}\t{C10}')  
 
 def main():
