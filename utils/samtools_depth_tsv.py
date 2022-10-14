@@ -19,7 +19,8 @@ def run_samtools(files):
 		output = run(['bash', '-c', command])
 #		for line in output:
 #			print(f'{sample_name}\t{ref_name}\t{line}')
-		print(output)
+		split_output = output.split('\n')
+		print(split_output)
 
 def main():
 	infiles = args.infiles
