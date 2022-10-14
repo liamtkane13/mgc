@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 import argparse
-from glob import glob
+import glob
 import subprocess 
 from subprocess import Popen, PIPE
 
@@ -42,6 +42,7 @@ def run_samtools(files):
 
 def main():
 	infiles = args.infiles
+	infiles = glob.glob(infiles)
 	run_samtools(infiles)
 
 
