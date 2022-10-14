@@ -20,7 +20,6 @@ def run_samtools(files):
 
 		sample_name = file.split('-')[0]
 		ref_name = file.split('REF_')[1].split(':')[0]
-		print(f"{sample_name}\t{file}")
 		command = (f"samtools depth -a {file}")
 		output = Popen(['bash', '-c', command], stdout=PIPE)
 			
