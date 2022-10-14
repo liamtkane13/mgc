@@ -13,11 +13,12 @@ args = parser.parse_args()
 def run_samtools(files):
 	for file in files:
 		sample_name = file.split('-')[0]
+		ref_name = file.split('REF_')[1].split(':')[0]
 		print(f"{sample_name}\t{file}")
 		command = (f"samtools depth -a {file}")
 		output = run(['bash', '-c', command])
 		for line in output:
-			print(f'{sample_name}\t{line}')
+			print(f'{sample_name}\t{ref_name}\t{line}')
 
 def main():
 	infiles = args.infiles
