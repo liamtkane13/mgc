@@ -30,7 +30,7 @@ def run_samtools(files):
 			line = line.decode('utf8')
 			coverage = line.split('\t')[2]
 			
-			if coverage >= 10:
+			if int(coverage) >= 10:
 				cov_10 += 1 
 			
 			print(f'{sample_name}\t{ref_name}\t{coverage}')
