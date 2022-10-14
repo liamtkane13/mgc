@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 
 import argparse
-import glob
 import subprocess 
 from subprocess import Popen, PIPE
 
