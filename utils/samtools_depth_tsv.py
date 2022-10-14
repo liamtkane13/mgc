@@ -11,17 +11,17 @@ args = parser.parse_args()
 
 def make_name_dictionary():
 	name_dictionary = {
-		'barcode28' : 'MGC_A1_ITS'
-		'barcode33' : 'MGC_C1_ITS'
-		'barcode34' : 'D1_Direct_ITS'
-		'barcode35' : 'D2_Direct_ITS'
-		'barcode37' : 'D3_Direct_ITS'
-		'barcode38' : 'D4_Direct_ITS'
-		'barcode39' : 'MGC_A1_ROCK'
-		'barcode40' : 'MGC_C1_ROCK'
-		'barcode41' : 'D1_Direct_ROCK'
-		'barcode42' : 'D2_Direct_ROCK'
-		'barcode43' : 'D3_Direct_ROCK'
+		'barcode28' : 'MGC_A1_ITS',
+		'barcode33' : 'MGC_C1_ITS',
+		'barcode34' : 'D1_Direct_ITS',
+		'barcode35' : 'D2_Direct_ITS',
+		'barcode37' : 'D3_Direct_ITS',
+		'barcode38' : 'D4_Direct_ITS',
+		'barcode39' : 'MGC_A1_ROCK',
+		'barcode40' : 'MGC_C1_ROCK',
+		'barcode41' : 'D1_Direct_ROCK',
+		'barcode42' : 'D2_Direct_ROCK',
+		'barcode43' : 'D3_Direct_ROCK',
 		'barcode44' : 'D4_Direct_ROCK'
 	}
 	return name_dictionary
