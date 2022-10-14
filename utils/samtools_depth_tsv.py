@@ -33,7 +33,7 @@ def run_samtools(files):
 			
 				if int(coverage) >= 10:
 					cov_10 += 1
-					C10 = cov_10 / overall
+				C10 = cov_10 / overall
 					
 			except:
 				continue		 
