@@ -12,19 +12,29 @@ args = parser.parse_args()
 
 
 def run_samtools(files):
+
 	for file in files:
+
+		overall = 0
+		10cov = 0
 		sample_name = file.split('-')[0]
 		ref_name = file.split('REF_')[1].split(':')[0]
 		print(f"{sample_name}\t{file}")
 		command = (f"samtools depth -a {file}")
 		output = Popen(['bash', '-c', command], stdout=PIPE)
+			
 		for line in output.stdout:
+
+			overall += 1
 			line = line.decode('utf8')
 			coverage = line.split('\t')[2]
-#			print(line)	
+			
+			if coverage >= 10:
+				10cov += 1 
+			
 			print(f'{sample_name}\t{ref_name}\t{coverage}')
-#		split_output = output.split('\n')
-#		print(split_output)
+			C10 = 10cov / overall
+			print(f'{sample_name}\t{ref_name}\t{C10}')  
 
 def main():
 	infiles = args.infiles
