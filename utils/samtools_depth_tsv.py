@@ -18,6 +18,7 @@ def run_samtools(files):
 		command = (f"samtools depth -a {file}")
 		output = run(['bash', '-c', command])
 		for line in output:
+			line = line.decode('utf8')
 			print(line)
 		print(output)	
 #			print(f'{sample_name}\t{ref_name}\t{line}')
