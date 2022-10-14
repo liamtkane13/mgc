@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 
 import argparse
-from glob import glob 
+from glob import glob
+import subprocess 
 from subprocess import check_output as run
 
 parser = argparse.ArgumentParser(description='Input BAM files for samtools depth, to be output as a tsv file')
