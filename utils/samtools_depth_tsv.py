@@ -6,6 +6,7 @@ from subprocess import check_output as run
 
 parser = argparse.ArgumentParser(description='Input BAM files for samtools depth, to be output as a tsv file')
 parser.add_argument('-i', '--infiles', nargs = '+', help = 'BAM files for samtools', required = True, dest = 'infiles')
+args = parser.parse_args()
 
 
 
