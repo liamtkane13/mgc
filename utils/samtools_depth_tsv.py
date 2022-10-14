@@ -16,7 +16,8 @@ def run_samtools(files):
 	for file in files:
 
 		overall = 0
-		10cov = 0
+		10_cov = 0
+
 		sample_name = file.split('-')[0]
 		ref_name = file.split('REF_')[1].split(':')[0]
 		print(f"{sample_name}\t{file}")
@@ -30,10 +31,10 @@ def run_samtools(files):
 			coverage = line.split('\t')[2]
 			
 			if coverage >= 10:
-				10cov += 1 
+				10_cov += 1 
 			
 			print(f'{sample_name}\t{ref_name}\t{coverage}')
-			C10 = 10cov / overall
+			C10 = 10_cov / overall
 			print(f'{sample_name}\t{ref_name}\t{C10}')  
 
 def main():
