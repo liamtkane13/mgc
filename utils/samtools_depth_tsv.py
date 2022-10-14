@@ -24,15 +24,20 @@ def run_samtools(files):
 		output = Popen(['bash', '-c', command], stdout=PIPE)
 			
 		for line in output.stdout:
+			try:
 
-			overall += 1
-			line = line.decode('utf8')
-			coverage = line.split('\t')[2]
+				overall += 1
+				line = line.decode('utf8')
+				coverage = line.split('\t')[2]
 			
-			if int(coverage) >= 10:
-				cov_10 += 1 
+				if int(coverage) >= 10:
+					cov_10 += 1
+				C10 = cov_10 / overall
+					
+			except:
+				continue		 
 			
-		C10 = cov_10 / overall
+#		C10 = cov_10 / overall
 		print(f'{sample_name}\t{ref_name}\t{C10}')  
 
 def main():
