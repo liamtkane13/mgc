@@ -23,26 +23,24 @@ if (params.help){
 }
 
 infiles = Channel.fromPath(params."infile")
-                            .map {it -> [it.simpleName, it]}
 
 
 process gzip {
     
-    publishDir "${params.out_dir}/", mode: 'copy', overwrite: true, pattern: "*\*"
+    publishDir "${params.out_dir}/", mode: 'copy', overwrite: true, pattern: "*.gz"
     memory '2 G'
     cpus 1
 
     input:
-    set val(sample_id), file(infile) from infiles
+    set file(infile) from infiles
 
     output:
-    file("*") into output
+    file("*.gz") into output
 
     script:
     cpu = task.cpus
-    memory = task.memor.toGiga()
+    memory = task.memory.toGiga()
     """
-    gzip $infile
+    gzip -f $infile
     """
 }
-
