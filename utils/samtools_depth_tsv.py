@@ -42,9 +42,10 @@ def run_samtools(files):
 
 def main():
 	infiles = args.infiles
-	infiles = glob.glob(infiles)
-	for infile in infiles:
-		run_samtools(infile)
+	run_samtools(infiles)
+#	infiles = glob.glob(infiles)
+#	for infile in infiles:
+#		run_samtools(infile)
 
 
 if __name__ == "__main__":
