@@ -18,7 +18,7 @@ def run_samtools(files):
 		print(f"{sample_name}\t{file}")
 		command = (f"samtools depth -a {file}")
 		output = Popen(['bash', '-c', command], stdout=PIPE)
-		for line in output:
+		for line in output.stdout:
 			line = line.decode('utf8')
 			print(line)
 		print(output)	
