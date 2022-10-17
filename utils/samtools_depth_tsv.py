@@ -47,7 +47,7 @@ def run_samtools(files, dictionary):
 				overall += 1
 				line = line.decode('utf8')
 				coverage = line.split('\t')[2]
-				coverage_list.append(coverage)
+				coverage_list.append(int(coverage))
 			
 				if int(coverage) >= 10:
 					cov_10 += 1
