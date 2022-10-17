@@ -48,7 +48,7 @@ def run_samtools(files, dictionary):
 			
 				if int(coverage) >= 10:
 					cov_10 += 1
-				if int(coverage) = 0:
+				if int(coverage) == 0:
 					uncov_bases += 1	
 					
 			except:
