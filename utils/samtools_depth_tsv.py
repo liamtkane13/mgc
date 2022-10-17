@@ -32,6 +32,7 @@ def run_samtools(files, dictionary):
 
 		overall = 0
 		cov_10 = 0
+		cov_30 = 0
 		uncov_bases = 0
 		coverage_list = []
 
@@ -51,6 +52,8 @@ def run_samtools(files, dictionary):
 			
 				if int(coverage) >= 10:
 					cov_10 += 1
+				if int(coverage) >= 30:
+					cov_30 += 1	
 				if int(coverage) == 0:
 					uncov_bases += 1	
 					
@@ -59,16 +62,21 @@ def run_samtools(files, dictionary):
 		if overall > 0:		
 			C10 = cov_10 / overall
 			C10 = round(C10, 2)
+			C30 = cov_30 / overall
+			C30 = round(C30, 2)
 			uncov_percent = uncov_bases / overall
 			uncov_percent = round(uncov_percent, 2)
 			median_cov = statistics.median(coverage_list)
+			median_cov = round(median_cov, 2)
 			mean_cov = statistics.mean(coverage_list)
 			mean_cov = round(mean_cov, 2)
+
 		else:
 			C10 = 0.0
+			C30 = 0.0
 
 		if cov_10 > 0:		
-			print(f'{sample_name}\t{ref_name}\t{C10}\t{uncov_percent}\t{median_cov}\t{mean_cov}')  
+			print(f'{sample_name}\t{ref_name}\t{C10}\t{C30}\t{uncov_percent}\t{median_cov}\t{mean_cov}')  
 
 def main():
 	infiles = args.infiles
