@@ -112,7 +112,8 @@ def run_samtools(files, dictionary):
 			html_line = (f'<tr><td>{sample_name}</td><td>{ref_name}</td><td>{C10}</td><td>{C30}</td><td>{uncov_percent}</td><td>{median_cov}</td><td>{mean_cov}</td><td><a target="_blank" href="{igv_link}">IGV_Link</a></td></tr>')
 			html_table.append(html_line)
 
-	html_table.append('</table>')		
+	html_table.append('</table>')
+	print(html_table)
 
 def main():
 	infiles = args.infiles
