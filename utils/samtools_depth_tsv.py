@@ -31,6 +31,7 @@ def run_samtools(files, dictionary):
 
 		overall = 0
 		cov_10 = 0
+		uncov_bases = 0
 
 		barcode_name = file.split('-')[0]
 		sample_name = dictionary[barcode_name]
@@ -47,6 +48,8 @@ def run_samtools(files, dictionary):
 			
 				if int(coverage) >= 10:
 					cov_10 += 1
+				if int(coverage) = 0:
+					uncov_bases += 1	
 					
 			except:
 				continue		 
@@ -57,7 +60,7 @@ def run_samtools(files, dictionary):
 			C10 = 0.0
 
 		if cov_10 > 0:		
-			print(f'{sample_name}\t{ref_name}\t{C10}')  
+			print(f'{sample_name}\t{ref_name}\t{C10}\t{uncov_bases}')  
 
 def main():
 	infiles = args.infiles
