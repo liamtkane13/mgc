@@ -52,6 +52,7 @@ def run_samtools(files, dictionary):
 				continue		 
 		if overall > 0:		
 			C10 = cov_10 / overall
+			C10 = round(C10, 2)
 		else:
 			C10 = 0.0
 
