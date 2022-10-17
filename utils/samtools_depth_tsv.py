@@ -2,7 +2,8 @@
 
 import argparse
 import subprocess
-import statistics 
+import statistics
+import glob 
 from subprocess import Popen, PIPE
 
 parser = argparse.ArgumentParser(description='Input BAM files for samtools depth, to be output as a tsv file')
@@ -117,6 +118,7 @@ def run_samtools(files, dictionary):
 
 def main():
 	infiles = args.infiles
+	infiles = glob.glob(infiles)
 	name_dictionary = make_name_dictionary()
 	run_samtools(infiles, name_dictionary)
 
