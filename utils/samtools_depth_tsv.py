@@ -56,11 +56,13 @@ def run_samtools(files, dictionary):
 		if overall > 0:		
 			C10 = cov_10 / overall
 			C10 = round(C10, 2)
+			uncov_percent = uncov_bases / overall
+			uncov_percent = round(uncov_percent, 2)
 		else:
 			C10 = 0.0
 
 		if cov_10 > 0:		
-			print(f'{sample_name}\t{ref_name}\t{C10}\t{uncov_bases}')  
+			print(f'{sample_name}\t{ref_name}\t{C10}\t{uncov_percent}')  
 
 def main():
 	infiles = args.infiles
