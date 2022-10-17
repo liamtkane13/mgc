@@ -30,28 +30,28 @@ def run_samtools(files, dictionary):
 
 	html_table = []
 	
-    html_table.append("<head>")
-    intro_line = '<script src="https://code.jquery.com/jquery-3.5.1.js"></script>'
-    intro_line1 = '<script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>'
-    intro_line2 = '<script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap4.min.js"></script>'
-    link_line1 = '<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">'
-    link_line2 = '<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap.min.css">'
-    html_table.append(link_line1)
-    html_table.append(link_line2)
-    html_table.append(intro_line)
-    html_table.append(intro_line1)
-    html_table.append(intro_line2)
-    html_table.append("</head>")
-    html_table.append("<script>")
-    function = "$(document).ready( function () { \
-        $('#myTable').DataTable(); \
-    } )" 
+	html_table.append("<head>")
+	intro_line = '<script src="https://code.jquery.com/jquery-3.5.1.js"></script>'
+	intro_line1 = '<script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>'
+	intro_line2 = '<script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap4.min.js"></script>'
+	link_line1 = '<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">'
+	link_line2 = '<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap.min.css">'
+	html_table.append(link_line1)
+	html_table.append(link_line2)
+	html_table.append(intro_line)
+	html_table.append(intro_line1)
+	html_table.append(intro_line2)
+	html_table.append("</head>")
+	html_table.append("<script>")
+	function = "$(document).ready( function () { \
+		$('#myTable').DataTable(); \
+	} )" 
 
-    html_table.append(function)
-    html_table.append("</script>")	
+	html_table.append(function)
+	html_table.append("</script>")	
 
-    header = '<table id="myTable" class="table table-striped table-bordered" style="width:100%"><thead><tr><th>Sample_Name</th><th>Reference_Name</th><th>C10</th><th>C30</th><th>Percent_Bases_Uncovered</th><th>Median_Coverage</th><th>Mean_Coverage</th><th>IGV_Link</th></tr></thead>'
-    html_table.append(header)
+	header = '<table id="myTable" class="table table-striped table-bordered" style="width:100%"><thead><tr><th>Sample_Name</th><th>Reference_Name</th><th>C10</th><th>C30</th><th>Percent_Bases_Uncovered</th><th>Median_Coverage</th><th>Mean_Coverage</th><th>IGV_Link</th></tr></thead>'
+	html_table.append(header)
 
 	for file in files:
 
