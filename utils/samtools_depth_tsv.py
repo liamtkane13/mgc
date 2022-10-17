@@ -63,6 +63,7 @@ def run_samtools(files, dictionary):
 			uncov_percent = round(uncov_percent, 2)
 			median_cov = statistics.median(coverage_list)
 			mean_cov = statistics.mean(coverage_list)
+			mean_cov = round(mean_cov, 2)
 		else:
 			C10 = 0.0
 
