@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 
 import argparse
-import subprocess 
+import subprocess
+import statistics 
 from subprocess import Popen, PIPE
 
 parser = argparse.ArgumentParser(description='Input BAM files for samtools depth, to be output as a tsv file')
@@ -32,6 +33,7 @@ def run_samtools(files, dictionary):
 		overall = 0
 		cov_10 = 0
 		uncov_bases = 0
+		coverage_list = []
 
 		barcode_name = file.split('-')[0]
 		sample_name = dictionary[barcode_name]
@@ -45,6 +47,7 @@ def run_samtools(files, dictionary):
 				overall += 1
 				line = line.decode('utf8')
 				coverage = line.split('\t')[2]
+				coverage_list.append(coverage)
 			
 				if int(coverage) >= 10:
 					cov_10 += 1
@@ -58,11 +61,13 @@ def run_samtools(files, dictionary):
 			C10 = round(C10, 2)
 			uncov_percent = uncov_bases / overall
 			uncov_percent = round(uncov_percent, 2)
+			median_cov = statistics.median(coverage_list)
+			mean_cov = statistics.mean(coverage_list)
 		else:
 			C10 = 0.0
 
 		if cov_10 > 0:		
-			print(f'{sample_name}\t{ref_name}\t{C10}\t{uncov_percent}')  
+			print(f'{sample_name}\t{ref_name}\t{C10}\t{uncov_percent}\t{median_cov}\t{mean_cov}')  
 
 def main():
 	infiles = args.infiles
