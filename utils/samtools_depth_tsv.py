@@ -53,8 +53,10 @@ def run_samtools(files, dictionary):
 		if overall > 0:		
 			C10 = cov_10 / overall
 		else:
-			C10 = 0.0	
-		print(f'{sample_name}\t{ref_name}\t{C10}')  
+			C10 = 0.0
+
+		if cov_10 > 0:		
+			print(f'{sample_name}\t{ref_name}\t{C10}')  
 
 def main():
 	infiles = args.infiles
