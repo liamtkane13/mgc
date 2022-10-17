@@ -120,8 +120,7 @@ def main():
 	infiles = args.infiles
 	infiles = glob.glob(infiles)
 	name_dictionary = make_name_dictionary()
-	for infile in infiles:
-		run_samtools(infile, name_dictionary)
+	run_samtools(infiles, name_dictionary)
 
 
 if __name__ == "__main__":
