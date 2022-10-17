@@ -118,7 +118,7 @@ def run_samtools(files, dictionary):
 
 def main():
 	infiles = args.infiles
-	infiles = iglob(infiles, recursive=True)
+	infiles = glob.iglob(infiles, recursive=True)
 	name_dictionary = make_name_dictionary()
 	run_samtools(infiles, name_dictionary)
 
