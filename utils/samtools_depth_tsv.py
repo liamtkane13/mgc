@@ -39,6 +39,8 @@ def run_samtools(files, dictionary):
 		barcode_name = file.split('-')[0]
 		sample_name = dictionary[barcode_name]
 		ref_name = file.split('REF_')[1].split(':')[0]
+		bam_igv_raw = file.split('REF_')[0]
+		bam_igv = (f'{bam_igv_raw}.bam')
 		command = (f"samtools depth -a {file}")
 		output = Popen(['bash', '-c', command], stdout=PIPE)
 			
@@ -76,7 +78,7 @@ def run_samtools(files, dictionary):
 			C30 = 0.0
 
 		if cov_10 > 0:		
-			print(f'{sample_name}\t{ref_name}\t{C10}\t{C30}\t{uncov_percent}\t{median_cov}\t{mean_cov}')  
+			print(f'{sample_name}\t{ref_name}\t{C10}\t{C30}\t{uncov_percent}\t{median_cov}\t{mean_cov}\t{bam_igv}')  
 
 def main():
 	infiles = args.infiles
