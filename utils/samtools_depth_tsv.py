@@ -40,7 +40,11 @@ def run_samtools(files, dictionary):
 		sample_name = dictionary[barcode_name]
 		ref_name = file.split('REF_')[1].split(':')[0]
 		bam_igv_raw = file.split('REF_')[0]
-		bam_igv = (f'{bam_igv_raw}.bam')
+		bam_igv = (f'{bam_igv_raw}bam')
+
+		igv_link = (f'http://localhost:60151/load?file=http://mgcdata.s3.amazonaws.com/shared/igv-links/ONT_ref_coverage/{bam_igv}&genome=http://mgcdata.s3.amazonaws.com/shared/ref/Nanopore_TYM_and_Rockefeller_Amplicons_3.fasta') 
+
+
 		command = (f"samtools depth -a {file}")
 		output = Popen(['bash', '-c', command], stdout=PIPE)
 			
@@ -78,7 +82,7 @@ def run_samtools(files, dictionary):
 			C30 = 0.0
 
 		if cov_10 > 0:		
-			print(f'{sample_name}\t{ref_name}\t{C10}\t{C30}\t{uncov_percent}\t{median_cov}\t{mean_cov}\t{bam_igv}')  
+			print(f'{sample_name}\t{ref_name}\t{C10}\t{C30}\t{uncov_percent}\t{median_cov}\t{mean_cov}\t{igv_link}')  
 
 def main():
 	infiles = args.infiles
