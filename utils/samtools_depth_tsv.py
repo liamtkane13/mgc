@@ -6,9 +6,18 @@ import statistics
 import glob 
 from subprocess import Popen, PIPE
 
-parser = argparse.ArgumentParser(description='Input BAM files for samtools depth, to be output as a tsv file')
-parser.add_argument('-i', '--infiles', nargs = '+', help = 'BAM files for samtools', required = True, dest = 'infiles')
-args = parser.parse_args()
+def parse_arguments():
+	parser = argparse.ArgumentParser(description='Input BAM files for samtools depth, to be output as a tsv file')
+	parser.add_argument('-i', '--infiles', nargs = '+', help = 'BAM files for samtools', required = True, dest = 'infiles')
+	args = parser.parse_args()
+	matched_files = []
+	for file in args.infiles:
+		if glob.escape(file) != file:
+			matched_files.extend(glob.glob(file))
+		else:
+			matched_files.append(file)
+	return matched_files		
+
 
 def make_name_dictionary():
 	name_dictionary = {
@@ -117,9 +126,10 @@ def run_samtools(files, dictionary):
 	print(html_table)
 
 def main():
-	infiles = args.infiles
-	infiles = glob.iglob(infiles)
-	print(infiles)
+	matched_files = parse_arguments()
+#	infiles = args.infiles
+#	infiles = glob.glob(infiles)
+	print(matched_files)
 	name_dictionary = make_name_dictionary()
 #	run_samtools(infiles, name_dictionary)
 
