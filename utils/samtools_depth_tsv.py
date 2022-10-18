@@ -131,7 +131,7 @@ def main():
 #	infiles = glob.glob(infiles)
 	print(matched_files)
 	name_dictionary = make_name_dictionary()
-#	run_samtools(infiles, name_dictionary)
+	run_samtools(matched_files, name_dictionary)
 
 
 if __name__ == "__main__":
