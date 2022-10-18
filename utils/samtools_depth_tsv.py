@@ -117,8 +117,7 @@ def run_samtools(files, dictionary):
 			C10 = 0.0
 			C30 = 0.0
 
-		if cov_10 > 0:		
-#			print(f'{sample_name}\t{ref_name}\t{C10}\t{C30}\t{uncov_percent}\t{median_cov}\t{mean_cov}\t{igv_link}')  
+		if cov_10 > 0:
 			html_line = (f'<tr><td>{sample_name}</td><td>{ref_name}</td><td>{C10}</td><td>{C30}</td><td>{uncov_percent}</td><td>{median_cov}</td><td>{mean_cov}</td><td><a target="_blank" href="{igv_link}">IGV_Link</a></td></tr>')
 			html_table.append(html_line)
 
@@ -127,9 +126,6 @@ def run_samtools(files, dictionary):
 
 def main():
 	matched_files = parse_arguments()
-#	infiles = args.infiles
-#	infiles = glob.glob(infiles)
-	print(matched_files)
 	name_dictionary = make_name_dictionary()
 	run_samtools(matched_files, name_dictionary)
 
