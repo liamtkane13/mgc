@@ -60,7 +60,7 @@ def run_samtools(files, dictionary):
 	html_table.append(function)
 	html_table.append("</script>")	
 
-	header = '<table id="myTable" class="table table-striped table-bordered" style="width:100%"><thead><tr><th>Sample_Name</th><th>Reference_Name</th><th>C10</th><th>C30</th><th>Percent_Bases_Uncovered</th><th>Median_Coverage</th><th>Mean_Coverage</th><th>IGV_Link</th></tr></thead>'
+	header = '<table id="myTable" class="table table-striped table-bordered" style="width:100%"><thead><tr><th>Sample Name</th><th>Reference Name</th><th>C10</th><th>C30</th><th>Percent Bases Uncovered</th><th>Median Coverage</th><th>Mean Coverage</th><th>IGV Link</th></tr></thead>'
 	html_table.append(header)
 
 	for file in files:
