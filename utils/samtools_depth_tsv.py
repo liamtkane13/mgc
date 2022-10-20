@@ -75,10 +75,11 @@ def run_samtools(files, dictionary):
 		barcode_name = file.split('-')[0]
 		sample_name = dictionary[barcode_name]
 		ref_name = file.split('REF_')[1].split(':')[0]
+		contig_name = file.split('REF_')[1].split('.bam')[0]
 		bam_igv_raw = file.split('REF_')[0]
 		bam_igv = (f'{bam_igv_raw}bam')
 
-		igv_link = (f'http://localhost:60151/load?file=http://mgcdata.s3.amazonaws.com/shared/igv-links/ONT_ref_coverage/{bam_igv}&locus={ref_name}&genome=http://mgcdata.s3.amazonaws.com/shared/ref/Nanopore_TYM_and_Rockefeller_Amplicons_3.fasta') 
+		igv_link = (f'http://localhost:60151/load?file=http://mgcdata.s3.amazonaws.com/shared/igv-links/ONT_ref_coverage/{bam_igv}&locus={contig_name}&genome=http://mgcdata.s3.amazonaws.com/shared/ref/Nanopore_TYM_and_Rockefeller_Amplicons_3.fasta') 
 
 
 		command = (f"samtools depth -a {file}")
