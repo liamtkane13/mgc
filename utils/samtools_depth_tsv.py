@@ -78,7 +78,7 @@ def run_samtools(files, dictionary):
 		bam_igv_raw = file.split('REF_')[0]
 		bam_igv = (f'{bam_igv_raw}bam')
 
-		igv_link = (f'http://localhost:60151/load?file=http://mgcdata.s3.amazonaws.com/shared/igv-links/ONT_ref_coverage/{bam_igv}&genome=http://mgcdata.s3.amazonaws.com/shared/ref/Nanopore_TYM_and_Rockefeller_Amplicons_3.fasta') 
+		igv_link = (f'http://localhost:60151/load?file=http://mgcdata.s3.amazonaws.com/shared/igv-links/ONT_ref_coverage/{bam_igv}&locus={ref_name}&genome=http://mgcdata.s3.amazonaws.com/shared/ref/Nanopore_TYM_and_Rockefeller_Amplicons_3.fasta') 
 
 
 		command = (f"samtools depth -a {file}")
@@ -100,7 +100,7 @@ def run_samtools(files, dictionary):
 					uncov_bases += 1	
 					
 			except:
-				continue		 
+				continue 
 		if overall > 0:		
 			C10 = cov_10 / overall
 			C10 = round(C10, 2)
