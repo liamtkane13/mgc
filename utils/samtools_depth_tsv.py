@@ -123,7 +123,9 @@ def run_samtools(files, dictionary):
 			html_table.append(html_line)
 
 	html_table.append('</table>')
-	print(html_table)
+	for it in html_table:
+		print(it)
+
 
 def main():
 	matched_files = parse_arguments()
