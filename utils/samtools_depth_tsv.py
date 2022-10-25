@@ -21,18 +21,15 @@ def parse_arguments():
 
 def make_name_dictionary():
 	name_dictionary = {
-		'barcode28' : 'MGC_A1_ITS',
-		'barcode33' : 'MGC_C1_ITS',
-		'barcode34' : 'D1_Direct_ITS',
-		'barcode35' : 'D2_Direct_ITS',
-		'barcode37' : 'D3_Direct_ITS',
-		'barcode38' : 'D4_Direct_ITS',
-		'barcode39' : 'MGC_A1_ROCK',
-		'barcode40' : 'MGC_C1_ROCK',
-		'barcode41' : 'D1_Direct_ROCK',
-		'barcode42' : 'D2_Direct_ROCK',
-		'barcode43' : 'D3_Direct_ROCK',
-		'barcode44' : 'D4_Direct_ROCK'
+		'barcode57' : '72 Flower Rock',
+		'barcode58' : '72 MIP Rock',
+		'barcode59' : '72 Digest Rock',
+		'barcode60' : '31 Flower Rock',
+		'barcode61' : '31 MIP Rock',
+		'barcode62' : '31 Digest Rock',
+		'barcode63' : '27 Flower Rock',
+		'barcode64' : '27 MIP Rock',
+		'barcode65' : '27 Digest Rock',
 	}
 	return name_dictionary
 
