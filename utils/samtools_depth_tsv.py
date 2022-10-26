@@ -18,7 +18,7 @@ def parse_arguments():
 			matched_files.extend(glob.glob(file))
 		else:
 			matched_files.append(file)
-	return matched_files		
+	return matched_files, sample_sheet	
 
 
 def make_name_dictionary(samplesheet):
