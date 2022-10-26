@@ -27,6 +27,7 @@ def make_name_dictionary(samplesheet):
 		reader = csv.reader(file)
 		for line in reader:
 			name_dictonary = {line[3]:line[0]}
+	print(name_dictionary)		
 	return name_dictionary
 
 def run_samtools(files, dictionary):
