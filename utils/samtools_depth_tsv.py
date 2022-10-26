@@ -26,7 +26,7 @@ def make_name_dictionary(samplesheet):
 	with open(samplesheet, 'r')	as file:
 		reader = csv.reader(file)
 		for line in reader:
-			line = line.decode('utf8')
+#			line = line.decode('utf8')
 			name_dictonary = {line[0]:line[3]}
 	return name_dictionary
 
