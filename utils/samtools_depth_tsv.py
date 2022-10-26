@@ -25,7 +25,9 @@ def make_name_dictionary(samplesheet):
 	name_dictionary = {}
 	with open(samplesheet, 'r')	as file:
 		reader = csv.reader(file)
-		name_dictonary = {rows[0]:rows[3] for rows in reader}
+		for line in reader:
+			line = line.decode('utf8')
+			name_dictonary = {line[0]:line[3]}
 	return name_dictionary
 
 def run_samtools(files, dictionary):
