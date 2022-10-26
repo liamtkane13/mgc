@@ -26,7 +26,6 @@ def make_name_dictionary(samplesheet):
 	with open(samplesheet, 'r')	as file:
 		reader = csv.reader(file)
 		for line in reader:
-#			line = line.decode('utf8')
 			name_dictonary = {line[0]:line[3]}
 	return name_dictionary
 
@@ -66,7 +65,7 @@ def run_samtools(files, dictionary):
 		coverage_list = []
 
 
-		barcode_name = file.split('-')[0]
+		barcode_name = file.split('-')[0].lstrip('barcode')
 		sample_name = dictionary[barcode_name]
 		ref_name = file.split('REF_')[1].split(':')[0]
 		contig_name = file.split('REF_')[1].split('.bam')[0]
