@@ -120,8 +120,8 @@ def run_samtools(files, dictionary):
 
 
 def main():
-	matched_files = parse_arguments(sample_sheet)
-	name_dictionary = make_name_dictionary()
+	matched_files = parse_arguments()
+	name_dictionary = make_name_dictionary(args.sample_sheet)
 	run_samtools(matched_files, name_dictionary)
 
 
