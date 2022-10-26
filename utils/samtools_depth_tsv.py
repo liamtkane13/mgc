@@ -65,9 +65,9 @@ def run_samtools(files, dictionary):
 		coverage_list = []
 
 
-		barcode_name = file.split('-')[0].lstrip('barcode')
+		barcode_name = file.split('-')[0].split('code')[1]
 		print(barcode_name)
-		sample_name = (f'barcode{dictionary[barcode_name]}')
+		sample_name = dictionary[barcode_name]
 		ref_name = file.split('REF_')[1].split(':')[0]
 		contig_name = file.split('REF_')[1].split('.bam')[0]
 		bam_igv_raw = file.split('REF_')[0]
