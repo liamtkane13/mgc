@@ -25,8 +25,9 @@ def make_name_dictionary(samplesheet):
 	name_dictionary = {}
 	with open(samplesheet, 'r')	as file:
 		reader = csv.reader(file)
-#		for line in reader:
-		name_dictonary = {line[3]:line[0] for line in reader}
+		for line in reader:
+			print(line)
+			name_dictonary = {line[3]:line[0]}
 	print(name_dictionary)			
 	return name_dictionary
 
