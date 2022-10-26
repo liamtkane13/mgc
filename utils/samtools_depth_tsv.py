@@ -3,12 +3,14 @@
 import argparse
 import subprocess
 import statistics
-import glob 
+import glob
+import csv 
 from subprocess import Popen, PIPE
 
 def parse_arguments():
 	parser = argparse.ArgumentParser(description='Input BAM files for samtools depth, to be output as a tsv file')
 	parser.add_argument('-i', '--infiles', nargs = '+', help = 'BAM files for samtools', required = True, dest = 'infiles')
+	parser.add_argument('-s', '--sample_sheet', help = 'Sample Sheet for naming', dest = 'sample_sheet')
 	args = parser.parse_args()
 	matched_files = []
 	for file in args.infiles:
@@ -19,16 +21,11 @@ def parse_arguments():
 	return matched_files		
 
 
-def make_name_dictionary():
-	name_dictionary = {
-		'barcode66' : '72 MIP ITS3',
-		'barcode67' : '72 Digest ITS3',
-		'barcode68' : '31 MIP Rock',
-		'barcode69' : '31 Digest ITS3',
-		'barcode70' : '27 Flower ITS3',
-		'barcode71' : '27 MIP ITS3',
-		'barcode72' : '27 Digest ITS3',
-	}
+def make_name_dictionary(samplesheet):
+	name_dictionary = {}
+	with open(samplesheet, 'r')	as file:
+		reader = csv.reader(file)
+		name_dictonary = {rows[0]:rows[3] for rows in reader}
 	return name_dictionary
 
 def run_samtools(files, dictionary):
