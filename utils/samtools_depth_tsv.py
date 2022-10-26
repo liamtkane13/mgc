@@ -21,15 +21,13 @@ def parse_arguments():
 
 def make_name_dictionary():
 	name_dictionary = {
-		'barcode57' : '72 Flower Rock',
-		'barcode58' : '72 MIP Rock',
-		'barcode59' : '72 Digest Rock',
-		'barcode60' : '31 Flower Rock',
-		'barcode61' : '31 MIP Rock',
-		'barcode62' : '31 Digest Rock',
-		'barcode63' : '27 Flower Rock',
-		'barcode64' : '27 MIP Rock',
-		'barcode65' : '27 Digest Rock',
+		'barcode66' : '72 MIP ITS3',
+		'barcode67' : '72 Digest ITS3',
+		'barcode68' : '31 MIP Rock',
+		'barcode69' : '31 Digest ITS3',
+		'barcode70' : '27 Flower ITS3',
+		'barcode71' : '27 MIP ITS3',
+		'barcode72' : '27 Digest ITS3',
 	}
 	return name_dictionary
 
@@ -76,7 +74,7 @@ def run_samtools(files, dictionary):
 		bam_igv_raw = file.split('REF_')[0]
 		bam_igv = (f'{bam_igv_raw}bam')
 
-		igv_link = (f'http://localhost:60151/load?file=http://mgcdata.s3.amazonaws.com/shared/igv-links/ONT_ref_coverage/{bam_igv}&locus={contig_name}&genome=http://mgcdata.s3.amazonaws.com/shared/ref/Nanopore_TYM_and_Rockefeller_Amplicons_3.fasta') 
+		igv_link = (f'http://localhost:60151/load?file=https://mgcdata.s3.amazonaws.com/shared/igv-links/ONT_ref_coverage/{bam_igv}&locus={contig_name}&genome=https://mgcdata.s3.amazonaws.com/shared/ref/Nanopore_TYM_and_Rockefeller_Amplicons_3.fasta') 
 
 
 		command = (f"samtools depth -a {file}")
