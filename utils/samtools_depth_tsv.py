@@ -67,7 +67,6 @@ def run_samtools(files, dictionary):
 
 
 		barcode_name = file.split('-')[0].split('code')[1]
-		print(barcode_name)
 		sample_name = dictionary[barcode_name]
 		ref_name = file.split('REF_')[1].split(':')[0]
 		contig_name = file.split('REF_')[1].split('.bam')[0]
