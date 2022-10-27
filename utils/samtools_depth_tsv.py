@@ -28,7 +28,7 @@ def make_name_dictionary(samplesheet):
 		reader = csv.reader(file)
 		for line in reader:
 			print(line)
-		name_dictonary = {rows[3]:rows[0] for rows in reader}
+		name_dictionary = {rows[3]:rows[0] for rows in reader}
 	print(name_dictionary)			
 	return name_dictionary
 
