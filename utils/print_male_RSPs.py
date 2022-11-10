@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-# print_out_male_RSPs.py
+# print_male_RSPs.py
 
 from pymongo import MongoClient
 from dotenv import load_dotenv
@@ -21,12 +21,19 @@ def query_mongo():
     collection = database['SS2']
 
 
-    regx = re.compile('RSP[0-9]')
-    srr_regx = re.compile('SRR[0-9]')
+    regex = re.compile('RSP[0-9]')
+    srr_regex = re.compile('SRR[0-9]')
 
     for i in collection.find({"_id":regex}):
-    	if i['plant_sex'] == 'Male':
-    		print(i['_id'])
+
+        try:
+            sex = i['plant_sex']
+            if sex == 'Male':
+                if i['ss_version'] == 'WGS':
+                    print(i['_id'])
+
+        except:
+            continue        
 
 
 def main():
