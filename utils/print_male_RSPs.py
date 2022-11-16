@@ -33,11 +33,30 @@ def query_mongo():
                     print(i['_id'])
 
         except:
-            continue        
+            continue
+
+
+def query_from_40Genome_files():
+    naming_dict = {}
+    with open('/Users/liamkane/software/liam_git/utils/Sample_info.txt', 'r') as file:
+        with open('/Users/liamkane/software/liam_git/utils/rsp-to-sample.txt', 'r') as file2:
+            for lines in file2:
+                rsp = lines.split('\t')[0]
+                sample_n = lines.split('\t')[1].rstrip('\n')
+                naming_dict[sample_n] = rsp
+                for line in file:
+                    sample_name = line.split('\t')[0]
+                    sex = line.split('\t')[4]
+                    print(naming_dict)
+                    if sample_name in naming_dict:
+                        processed_rsp = naming_dict[sample_name]
+                        print(processed_rsp)
+
 
 
 def main():
-	query_mongo()
+#    query_mongo()
+    query_from_40Genome_files()
 
 
 if __name__ == '__main__':
