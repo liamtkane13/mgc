@@ -26,13 +26,25 @@ def connect_to_mongo():
 
 def sha256sum_fastqs_and_check_mongo(collect):
 	regex = re.compile('PSP[0-9]')
-#	with open('/Users/liamkane/Desktop/Bioinformatics/psilocybe_samples.txt', 'r') as file:
-#		for line in file:
-	for i in collect.find({"_id":regex}):
-		try:
-			print(i['fastq_hash']['original']['fq1']['sha256sum'])
-		except:
-			continue
+	with open('/Users/liamkane/Desktop/Bioinformatics/psilocybe_samples.txt', 'r') as file:
+		for line in file:
+			bucket = line.split('\t')[0]
+			sample = line.split('\t')[1].strip('\n')
+
+			download_command = (f'aws s3 cp s3://mgcdata/SS2/runs/{bucket}{sample} .')
+			sha_command = (f'sha256sum {sample}')
+			delete_sample = (f'rm {sample}')
+			run(['bash', '-c', download_command])
+			sha256sum = run(['bash', '-c', sha_command])
+			run(['bash', '-c', delete_sample]) 
+
+
+
+
+		for i in collect.find({"_id":regex}):
+		
+			if sha256sum == (i['fastq_hash']['original']['fq1']['sha256sum']):
+				print(i['_id'])
 
 
 
