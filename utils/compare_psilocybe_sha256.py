@@ -35,16 +35,17 @@ def sha256sum_fastqs_and_check_mongo(collect):
 			sha_command = (f'sha256sum {sample}')
 			delete_sample = (f'rm {sample}')
 			run(['bash', '-c', download_command])
-			sha256sum = run(['bash', '-c', sha_command])
-			run(['bash', '-c', delete_sample]) 
+			sha256sum = ((run(['bash', '-c', sha_command])).decode('utf8')).split('  ')[0]
+			run(['bash', '-c', delete_sample])
 
 
 
 
-		for i in collect.find({"_id":regex}):
-		
-			if sha256sum == (i['fastq_hash']['original']['fq1']['sha256sum']):
-				print(i['_id'])
+			for i in collect.find({"_id":regex}):
+				if sha256sum == (i['fastq_hash']['original']['fq1']['sha256sum']):
+					print(f"{i['_id']} R1 is {sample}")
+				if sha256sum == (i['fastq_hash']['original']['fq2']['sha256sum']):	
+					print(f"{i['_id']} R2 is {sample}")
 
 
 
