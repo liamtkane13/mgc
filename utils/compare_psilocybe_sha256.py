@@ -27,25 +27,32 @@ def connect_to_mongo():
 def sha256sum_fastqs_and_check_mongo(collect):
 	regex = re.compile('PSP[0-9]')
 	with open('/Users/liamkane/Desktop/Bioinformatics/psilocybe_samples.txt', 'r') as file:
-		for line in file:
-			bucket = line.split('\t')[0]
-			sample = line.split('\t')[1].strip('\n')
+		with open('/Users/liamkane/Desktop/Bioinformatics/psp_to_raw_files.tsv','w') as outfile:
+			for line in file:
+				bucket = line.split('\t')[0]
+				sample = line.split('\t')[1].strip('\n')
 
-			download_command = (f'aws s3 cp s3://mgcdata/SS2/runs/{bucket}{sample} .')
-			sha_command = (f'sha256sum {sample}')
-			delete_sample = (f'rm {sample}')
-			run(['bash', '-c', download_command])
-			sha256sum = ((run(['bash', '-c', sha_command])).decode('utf8')).split('  ')[0]
-			run(['bash', '-c', delete_sample])
+				download_command = (f'aws s3 cp s3://mgcdata/SS2/runs/{bucket}{sample} .')
+				sha_command = (f'sha256sum {sample}')
+				delete_sample = (f'rm {sample}')
+				run(['bash', '-c', download_command])
+				sha256sum = ((run(['bash', '-c', sha_command])).decode('utf8')).split('  ')[0]
+				run(['bash', '-c', delete_sample])
 
 
 
 
-			for i in collect.find({"_id":regex}):
-				if sha256sum == (i['fastq_hash']['original']['fq1']['sha256sum']):
-					print(f"{i['_id']} R1 is {sample}")
-				if sha256sum == (i['fastq_hash']['original']['fq2']['sha256sum']):	
-					print(f"{i['_id']} R2 is {sample}")
+				data = collect.find({"_id":regex})	
+				for i in data:
+					if sha256sum == (i['fastq_hash']['original']['fq1']['sha256sum']):
+						print(f"{i['_id']} R1 is {sample}")
+						outfile.write(f"{i['_id']}\tR1\t{sample}\n")
+					if sha256sum == (i['fastq_hash']['original']['fq2']['sha256sum']):	
+						print(f"{i['_id']} R2 is {sample}")
+						outfile.write(f"{i['_id']}\tR2\t{sample}\n")
+		outfile.close()
+	file.close()					
+
 
 
 
