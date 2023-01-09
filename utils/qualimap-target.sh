@@ -2,7 +2,7 @@
 
 # qualimap-target.sh
 
-for i in `cat test.txt`;
+for i in `cat ss_v3_samples.txt`;
 do 
 aws s3 cp s3://mgcdata/SS2/bams/public/${i}.bam .
 mkdir ${i}/
