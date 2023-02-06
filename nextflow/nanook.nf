@@ -21,3 +21,10 @@ if (params.help){
     helpMessage()
     exit 0
 }
+
+
+process nanook {
+
+	container 'biocontainers/nanook:v1.33dfsg-1-deb_cv1'
+
+}

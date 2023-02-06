@@ -28,7 +28,7 @@ def generate_hashes(collect):
 	with open('/Users/liamkane/software/psp-tmp/psp-needing-hashes.txt', 'r') as file:
 		for line in file:
 			psp = line.strip('\n')
-			
+		
 			database = collect.find({'_id':psp})
 			for i in database:
 				link_end_1 = (i['fastq_link'][0]).split('com')[1]

@@ -11,9 +11,24 @@ def parse_arguments():
 	return infile
 
 def filter_blast_results(in_file):
+	forward_list = []
+	reverse_list = []
+	probe_list = []
+	final_list = []
 	with open(in_file, 'r') as file:
 		for line in file:
-			print(line)
+			primer = line.split('\t')[0]
+			contig = line.split('\t')[1]
+			e_val = line.split('\t')[10]
+			if primer == 'F':
+				forward_list.append(line)
+			if primer == 'R':
+				reverse_list.append(line)
+			if primer == 'P':
+				probe_list.append(line)
+		print(primer)
+		print(forward_list)
+		print(probe_list)					
 
 
 def main():

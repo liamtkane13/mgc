@@ -44,18 +44,20 @@ def query_from_40Genome_files():
                 rsp = lines.split('\t')[0]
                 sample_n = lines.split('\t')[1].rstrip('\n')
                 naming_dict[sample_n] = rsp
-                for line in file:
-                    sample_name = line.split('\t')[0]
-                    sex = line.split('\t')[4]
-                    print(naming_dict)
+            for line in file:
+                sample_name = line.split('\t')[0]
+                sex = line.split('\t')[4].strip('\n')
+                if sex == 'M':
                     if sample_name in naming_dict:
                         processed_rsp = naming_dict[sample_name]
-                        print(processed_rsp)
+                        print(processed_rsp) 
+                    else:
+                        print(sample_name)    
 
 
 
 def main():
-#    query_mongo()
+    query_mongo()
     query_from_40Genome_files()
 
 

@@ -10,8 +10,6 @@ def query_s3():
 			line = line.rstrip('\n')
 			command = (f'aws s3 ls s3://mgcdata/SS2/runs/{line}')
 			command_output = run(['bash', '-c', command])
-#			test_command = (f'aws s3 ls s3://mgcdata/SS2/runs/20181122/')
-#			test_command_output = run(['bash', '-c', test_command])
 			out = command_output.decode('utf8').split('\n')
 
 			for i in out:

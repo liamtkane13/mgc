@@ -12,6 +12,7 @@ args = parser.parse_args()
 contig_dict = {}
 scaffold_list = []
 
+
 def parse_contigs():
     counter = 0
     with open(args.infile, 'r') as infile:
@@ -28,8 +29,7 @@ def parse_contigs():
                 scaffolds = line.split(' ')
                 scaffold_list.append(scaffolds)
                 counter +=1
-
-
+    return counter
 
 def align_scaffolds(dict, list):
     for item in list:
@@ -38,10 +38,11 @@ def align_scaffolds(dict, list):
     
 
 def main():
-    parse_contigs()
+    counter = parse_contigs()
 #    print(contig_dict)
 #    print(scaffold_list)
-    align_scaffolds(contig_dict, scaffold_list)
+#    align_scaffolds(contig_dict, scaffold_list)
+    print(counter)
 
 if __name__ == '__main__':
     main()
