@@ -79,3 +79,5 @@ STDERR.puts post_json
 
 record={'filename'=>filename, 'digest' => hash, 'txid' => post_json["txid"], 'url' => post_json["url"]}
 
+puts(JSON.pretty_generate(post_json))
+exit
