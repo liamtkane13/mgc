@@ -58,9 +58,28 @@ process parse_qualimap {
 
 	script:
 	"""
-	cat ${dir}/${sample_id}/${sample_id}/genome_results.txt | grep 'gi|' | sed -e 's/^[ \t]*//' > ${sample_id}-cov-per-virus.tsv
+    echo -e 'Accession\tVirus_Length\t${sample_id}_Mapped_Bases\t${sample_id}_Mean_Coverage\t${sample_id}_Standard_Deviation' > ${sample_id}-cov-per-virus.tsv
+    
+	cat ${dir}/${sample_id}/${sample_id}/genome_results.txt | grep 'gi|' | sed -e 's/^[ \t]*//' >> ${sample_id}-cov-per-virus.tsv
 	"""
-}	
+}
+parse_qualimap_output
+    .map{it -> [it[1]]}
+    .collect()
+    .view()
+    .set{write_tsv_input}
+
+//process write_tsv {
+
+//    publishDir "${params.out_dir}" +'/', mode: 'copy', overwrite: false, pattern: "*"
+
+//    input:
+//    file(sample_tsv) from write_tsv_input
+
+//    output:
+//    file
+
+        	
 
 
 
