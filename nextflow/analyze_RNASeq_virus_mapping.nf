@@ -61,7 +61,7 @@ process parse_qualimap {
 	"""
     echo -e 'Accession\tVirus_Length\t${sample_id}_Mapped_Bases\t${sample_id}_Mean_Coverage\t${sample_id}_Standard_Deviation' > ${sample_id}-cov-per-virus.tsv
     
-	cat ${dir}/${sample_id}/${sample_id}/genome_results.txt | grep 'gi|' | sed -e 's/^[ \t]*//' >> ${sample_id}-cov-per-virus.tsv
+	cat ${dir}/${sample_id}/${sample_id}/genome_results.txt | grep 'gi|' | sed -e 's/^[ \t]*//' | cut -f 2 -d 'f' | sed -e 's/|//'| sed -e 's/|//' >> ${sample_id}-cov-per-virus.tsv
 	"""
 }
 
