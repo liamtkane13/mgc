@@ -63,22 +63,29 @@ process parse_qualimap {
 	cat ${dir}/${sample_id}/${sample_id}/genome_results.txt | grep 'gi|' | sed -e 's/^[ \t]*//' >> ${sample_id}-cov-per-virus.tsv
 	"""
 }
+
+
 parse_qualimap_output
     .map{it -> [it[1]]}
     .collect()
     .view()
     .set{write_tsv_input}
 
-//process write_tsv {
 
-//    publishDir "${params.out_dir}" +'/', mode: 'copy', overwrite: false, pattern: "*"
+process write_tsv {
 
-//    input:
-//    file(sample_tsv) from write_tsv_input
+    publishDir "${params.out_dir}" +'/', mode: 'copy', overwrite: false, pattern: "*"
+
+    input:
+    file(sample_tsv) from write_tsv_input
 
 //    output:
 //    file
-
+    script:
+    """
+    python3 /Users/liamkane/software/liam_git/utils/parse_qualimap_cov_tsv.py --i ${sample_tsv}
+    """
+}     
         	
 
 
