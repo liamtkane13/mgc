@@ -9,6 +9,7 @@ def helpMessage() {
         Mandatory arguments:
            --sample_file           File of Sample Names (one per line) to process
            --qualimap_path         Path to QualiMap Output Directories for analysis
+           --run_name              Batch/run name for output tsv
            --out_dir          	   Output Directory (for things that aren't intermediate files to keep)
     """.stripIndent()
 }
@@ -78,16 +79,12 @@ process write_tsv {
 
     input:
     file(sample_tsv) from write_tsv_input
+    val(batch) from params."run_name"
 
-//    output:
-//    file
+    output:
+    file("*.tsv") into write_tsv_output
     script:
     """
-    python3 /Users/liamkane/software/liam_git/utils/parse_qualimap_cov_tsv.py --i ${sample_tsv}
+    python3 /Users/liamkane/software/liam_git/utils/parse_qualimap_cov_tsv.py --i ${sample_tsv} --b ${batch}
     """
 }     
-        	
-
-
-
-
