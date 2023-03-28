@@ -27,8 +27,8 @@ def tsv_crunching(files, batch):
             data.append(df)
             first_df = pd.concat(data)
         else:
-            final_df = first_df.append(df)
-#        final_df = pd.merge(first_df, new_df)    
+            new_df = pd.merge(first_df, df)
+            final_df = pd.append(new_df)
     print(final_df)
     file_name = (f'{batch}_RNASeq_virus_mapping.tsv')
     final_df.to_csv(file_name, sep='\t')     
