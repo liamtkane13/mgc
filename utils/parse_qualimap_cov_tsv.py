@@ -18,6 +18,7 @@ def parse_arguments():
 
 def tsv_crunching(files, batch):
     data = []
+    final = []
     counter = 0
     for file in files:
         counter +=1
@@ -28,7 +29,8 @@ def tsv_crunching(files, batch):
             first_df = pd.concat(data)
         else:
             new_df = pd.merge(first_df, df)
-            final_df = pd.append(new_df)
+            final.append(new_df)
+    final_df = pd.concat(final)        
     print(final_df)
     file_name = (f'{batch}_RNASeq_virus_mapping.tsv')
     final_df.to_csv(file_name, sep='\t')     
