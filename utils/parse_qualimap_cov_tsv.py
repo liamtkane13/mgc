@@ -17,22 +17,24 @@ def parse_arguments():
 
 
 def tsv_crunching(files, batch):
-    data = []
-    final = []
+
     counter = 0
+
     for file in files:
+
         counter +=1
-        df = pd.read_csv(file, sep='\t')
-        print(df)
-#        if counter == 1:
-#            data.append(df)
-#            first_df = pd.concat(data)
-#        else:
-#            new_df = pd.merge(first_df, df)
-#            final.append(new_df)
-        final.append(df)
-    final_df = pd.concat(final)        
-    print(final_df)
+
+        if counter == 1:
+            first_df = pd.read_csv(file, sep='\t')
+
+        if counter == 2:
+            second_df = pd.read_csv(file, sep='\t')
+            final_df = pd.merge(first_df, second_df)
+
+        if counter > 2:
+            df = pd.read_csv(file, sep='\t')
+            final_df = pd.merge(final_df, df)
+  
     file_name = (f'{batch}_RNASeq_virus_mapping.tsv')
     final_df.to_csv(file_name, sep='\t')     
 
