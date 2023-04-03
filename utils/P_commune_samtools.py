@@ -30,7 +30,7 @@ def make_name_dictionary(samplesheet):
 			name_dictionary[line[3]] = line[0]			
 	return name_dictionary
 
-def run_samtools(files, dictionary):
+def run_samtools(files):
 
 	html_table = []
 	
@@ -67,7 +67,7 @@ def run_samtools(files, dictionary):
 
 
 		barcode_name = file.split('-')[0].split('code')[1]
-		sample_name = dictionary[barcode_name]
+		sample_name = barcode_name
 		ref_name = file.split('REF_')[1].split(':')[0]
 		contig_name = file.split('REF_')[1].split('.bam')[0]
 		bam_igv_raw = file.split('REF_')[0]
@@ -123,9 +123,9 @@ def run_samtools(files, dictionary):
 
 
 def main():
-	matched_files, sample_sheet = parse_arguments()
-	name_dictionary = make_name_dictionary(sample_sheet)
-	run_samtools(matched_files, name_dictionary)
+	matched_files = parse_arguments()
+#	name_dictionary = make_name_dictionary(sample_sheet)
+	run_samtools(matched_files)
 
 
 if __name__ == "__main__":
