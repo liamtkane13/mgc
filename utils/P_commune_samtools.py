@@ -59,6 +59,8 @@ def run_samtools(files):
 
 	for file in files:
 
+		print(file)
+
 		overall = 0
 		cov_10 = 0
 		cov_30 = 0
