@@ -60,6 +60,8 @@ def run_samtools(files):
 	for file in files:
 
 		print(file)
+		for f in file:
+			print(f)
 
 		overall = 0
 		cov_10 = 0
