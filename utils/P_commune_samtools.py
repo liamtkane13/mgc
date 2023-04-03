@@ -59,71 +59,71 @@ def run_samtools(files):
 
 	for file in files:
 
-		print(file)
-		for f in file:
-			print(f)
+#		print(file)
+		for file in file:
+		
 
-		overall = 0
-		cov_10 = 0
-		cov_30 = 0
-		uncov_bases = 0
-		coverage_list = []
-
-
-		barcode_name = file.split('-')[0].split('code')[1]
-		sample_name = barcode_name
-		ref_name = file.split('REF_')[1].split(':')[0]
-		contig_name = file.split('REF_')[1].split('.bam')[0]
-		bam_igv_raw = file.split('REF_')[0]
-		bam_igv = (f'{bam_igv_raw}bam')
-
-		igv_link = (f'http://localhost:60151/load?file=https://mgcdata.s3.amazonaws.com/shared/igv-links/march22-2023-pathoseekID/{bam_igv}&locus={contig_name}&genome=https://mgcdata.s3.amazonaws.com/shared/igv-links/march22-2023-pathoseekID/Penicillium_commune_all_NCBI.fasta') 
+			overall = 0
+			cov_10 = 0
+			cov_30 = 0
+			uncov_bases = 0
+			coverage_list = []
 
 
+			barcode_name = file.split('-')[0].split('code')[1]
+			sample_name = barcode_name
+			ref_name = file.split('REF_')[1].split(':')[0]
+			contig_name = file.split('REF_')[1].split('.bam')[0]
+			bam_igv_raw = file.split('REF_')[0]
+			bam_igv = (f'{bam_igv_raw}bam')
 
-		command = (f"samtools depth -a {file}")
-		output = Popen(['bash', '-c', command], stdout=PIPE)
+			igv_link = (f'http://localhost:60151/load?file=https://mgcdata.s3.amazonaws.com/shared/igv-links/march22-2023-pathoseekID/{bam_igv}&locus={contig_name}&genome=https://mgcdata.s3.amazonaws.com/shared/igv-links/march22-2023-pathoseekID/Penicillium_commune_all_NCBI.fasta') 
+
+
+
+			command = (f"samtools depth -a {file}")
+			output = Popen(['bash', '-c', command], stdout=PIPE)
 			
-		for line in output.stdout:
-			try:
+			for line in output.stdout:
+				try:
 
-				overall += 1
-				line = line.decode('utf8')
-				coverage = line.split('\t')[2]
-				coverage_list.append(int(coverage))
-			
-				if int(coverage) >= 10:
-					cov_10 += 1
-				if int(coverage) >= 30:
-					cov_30 += 1	
-				if int(coverage) == 0:
-					uncov_bases += 1	
+					overall += 1
+					line = line.decode('utf8')
+					coverage = line.split('\t')[2]
+					coverage_list.append(int(coverage))
+				
+					if int(coverage) >= 10:
+						cov_10 += 1
+					if int(coverage) >= 30:
+						cov_30 += 1	
+					if int(coverage) == 0:
+						uncov_bases += 1	
 					
-			except:
-				continue 
-		if overall > 0:		
-			C10 = cov_10 / overall
-			C10 = round(C10, 2)
-			C30 = cov_30 / overall
-			C30 = round(C30, 2)
-			uncov_percent = uncov_bases / overall
-			uncov_percent = round(uncov_percent, 2)
-			median_cov = statistics.median(coverage_list)
-			median_cov = round(median_cov, 2)
-			mean_cov = statistics.mean(coverage_list)
-			mean_cov = round(mean_cov, 2)
+				except:
+					continue 
+			if overall > 0:		
+				C10 = cov_10 / overall
+				C10 = round(C10, 2)
+				C30 = cov_30 / overall
+				C30 = round(C30, 2)
+				uncov_percent = uncov_bases / overall
+				uncov_percent = round(uncov_percent, 2)
+				median_cov = statistics.median(coverage_list)
+				median_cov = round(median_cov, 2)
+				mean_cov = statistics.mean(coverage_list)
+				mean_cov = round(mean_cov, 2)
 
-		else:
-			C10 = 0.0
-			C30 = 0.0
+			else:
+				C10 = 0.0
+				C30 = 0.0
 
-		if cov_10 > 0:
-			html_line = (f'<tr><td>{sample_name}</td><td>{ref_name}</td><td>{C10}</td><td>{C30}</td><td>{uncov_percent}</td><td>{median_cov}</td><td>{mean_cov}</td><td><a target="_blank" href="{igv_link}">IGV_Link</a></td></tr>')
-			html_table.append(html_line)
+			if cov_10 > 0:
+				html_line = (f'<tr><td>{sample_name}</td><td>{ref_name}</td><td>{C10}</td><td>{C30}</td><td>{uncov_percent}</td><td>{median_cov}</td><td>{mean_cov}</td><td><a target="_blank" href="{igv_link}">IGV_Link</a></td></tr>')
+				html_table.append(html_line)
 
-	html_table.append('</table>')
-	for it in html_table:
-		print(it)
+		html_table.append('</table>')
+		for it in html_table:
+			print(it)
 
 
 def main():
