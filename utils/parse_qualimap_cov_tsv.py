@@ -25,7 +25,8 @@ def make_virus_dict():
         for line in file:
             line = line.strip('\n')
             accession = line.split('|')[3]
-            virus_dict[accession] = line
+            description = line.split('|')[4].lstrip(' ')
+            virus_dict[accession] = description
     
     return virus_dict  
 
@@ -61,7 +62,7 @@ def produce_igv_links(pathy):
     return final_igv_link
 
 
-def tsv_crunching(files, batch, link):
+def tsv_crunching(files, batch, link, dicti):
 
     counter = 0
 
@@ -80,6 +81,8 @@ def tsv_crunching(files, batch, link):
             df = pd.read_csv(file, sep='\t')
             final_df = pd.merge(final_df, df)
 
+
+    final_df['Virus_Description'] = final_df['Accession'].map(dicti)
     final_df['IGV_Link'] = link + final_df['Accession']        
   
     file_name = (f'{batch}_RNASeq_virus_mapping.tsv')
@@ -90,7 +93,7 @@ def main():
     infile_tsv, batch_name, s3_path = parse_arguments()
     virus_dict = make_virus_dict()
     igv_link = produce_igv_links(s3_path)
-    tsv_crunching(infile_tsv, batch_name, igv_link)
+    tsv_crunching(infile_tsv, batch_name, igv_link, virus_dict)
 
 if __name__ == '__main__':
 	main()	    
