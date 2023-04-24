@@ -45,15 +45,9 @@ process make_tmp_dir {
     """
 }
 
-tmp_dir_ex.into{
-
-    tmp_dir
-    tmp_dir_example
-}
-
-tmp_dir_example
+tmp_dir_ex
     .trim()
-    .view()
+    .set {tmp_dir}
 
 process s3_sync {
 
