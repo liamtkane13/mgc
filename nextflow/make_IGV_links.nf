@@ -16,6 +16,7 @@ def helpMessage() {
 
 
 params."git_dir" = '~/software'
+params."aws_source_cred" = '/home/ubuntu/.aws_batch'
 
 def proc_git = "git -C $baseDir rev-parse HEAD".execute()
 version = proc_git.text.trim()
@@ -46,13 +47,17 @@ process make_tmp_dir {
 
 process s3_sync {
 
+    container 'liamtkane/python_aws'
+
     input:
     val(dir) from tmp_dir
     file(bam) from params."bam"
     file(ref) from params."ref"
+    file(aws_source_cred) from file(params."aws_source_cred")
 
     script:
     """
+    source $aws_source_cred 
     aws s3 cp ${bam} s3://mgcdata/shared/igv-links/${dir}/
     aws s3 cp ${ref} s3://mgcdata/shared/igv-links/${dir}/
     s3cmd setacl s3://mgcdata/shared/igv-links/${dir}/${bam} --acl-public
