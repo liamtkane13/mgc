@@ -52,6 +52,7 @@ tmp_dir_ex.into{
 }
 
 tmp_dir_example
+    .trim()
     .view()
 
 process s3_sync {
