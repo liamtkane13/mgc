@@ -58,6 +58,7 @@ process s3_sync {
     val(dir) from tmp_dir
     file(bam) from file(params."bam")
     file(ref) from file(params."ref")
+    file(index) from file(params."ref" + '.fai')
     file(aws_source_cred) from file(params."aws_source_cred")
 
     output:
@@ -68,8 +69,10 @@ process s3_sync {
     source $aws_source_cred 
     aws s3 cp ${bam} s3://mgcdata/shared/igv-links/tmp/${dir}/
     aws s3 cp ${ref} s3://mgcdata/shared/igv-links/tmp/${dir}/
+    aws s3 cp ${index} s3://mgcdata/shared/igv-links/tmp/${dir}/
     s3cmd setacl s3://mgcdata/shared/igv-links/tmp/${dir}/${bam} --acl-public
     s3cmd setacl s3://mgcdata/shared/igv-links/tmp/${dir}/${ref} --acl-public
+    s3cmd setacl s3://mgcdata/shared/igv-links/tmp/${dir}/${index} --acl-public
     """
 }
 
