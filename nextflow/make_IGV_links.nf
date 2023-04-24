@@ -62,9 +62,9 @@ process s3_sync {
     script:
     """
     source $aws_source_cred 
-    aws s3 cp ${bam} s3://mgcdata/shared/igv-links/${dir}/
-    aws s3 cp ${ref} s3://mgcdata/shared/igv-links/${dir}/
-    s3cmd setacl s3://mgcdata/shared/igv-links/${dir}/${bam} --acl-public
-    s3cmd setacl s3://mgcdata/shared/igv-links/${dir}/${ref} --acl-public
+    aws s3 cp ${bam} s3://mgcdata/shared/igv-links/tmp/${dir}/
+    aws s3 cp ${ref} s3://mgcdata/shared/igv-links/tmp/${dir}/
+    s3cmd setacl s3://mgcdata/shared/igv-links/tmp/${dir}/${bam} --acl-public
+    s3cmd setacl s3://mgcdata/shared/igv-links/tmp/${dir}/${ref} --acl-public
     """
 }
