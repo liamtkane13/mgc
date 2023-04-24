@@ -9,7 +9,10 @@ import string
 
 def return_random_string():
 	s = string.ascii_lowercase+string.digits
-	print(''.join(random.sample(s, 6)))
+	new_string = (''.join(random.sample(s, 6)))
+	new_string.rstrip(' ')
+	print(new_string)
+
 
 def main():
 	return_random_string()
