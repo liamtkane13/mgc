@@ -37,13 +37,22 @@ process make_tmp_dir {
     file(git_dir) from file(params."git_dir") 
 
     output:
-    stdout into tmp_dir  
+    stdout into tmp_dir_ex 
 
     script:
     """
     python3 ${git_dir}/liam_git/utils/IGV_s3_bucket.py
     """
 }
+
+tmp_dir_ex.into{
+
+    tmp_dir
+    tmp_dir_example
+}
+
+tmp_dir_example
+    .view()
 
 process s3_sync {
 
