@@ -17,6 +17,7 @@ def helpMessage() {
 
 params."git_dir" = '/home/ubuntu/software'
 params."aws_source_cred" = '/home/ubuntu/.aws_batch'
+params."out_dir" = 'out/'
 
 def proc_git = "git -C $baseDir rev-parse HEAD".execute()
 version = proc_git.text.trim()
@@ -59,6 +60,9 @@ process s3_sync {
     file(ref) from file(params."ref")
     file(aws_source_cred) from file(params."aws_source_cred")
 
+    output:
+    val(dir) into s3_sync_output
+
     script:
     """
     source $aws_source_cred 
@@ -66,5 +70,24 @@ process s3_sync {
     aws s3 cp ${ref} s3://mgcdata/shared/igv-links/tmp/${dir}/
     s3cmd setacl s3://mgcdata/shared/igv-links/tmp/${dir}/${bam} --acl-public
     s3cmd setacl s3://mgcdata/shared/igv-links/tmp/${dir}/${ref} --acl-public
+    """
+}
+
+process write_link {
+
+    publishDir "${params.out_dir}" +'/', mode: 'copy', overwrite: false, pattern: "*"
+
+    container 'liamtkane/python_aws'
+
+    input:
+    val(dir) from s3_sync_output
+    file(git_dir) from file(params."git_dir")
+
+    output:
+    file('*.txt') into write_link_output
+
+    script:
+    """
+    python3 ${git_dir}/liam_git/utils/write_IGV_links.py -b ${dir}
     """
 }
