@@ -15,7 +15,7 @@ def helpMessage() {
 }
 
 
-params."git_dir" = '~/software'
+params."git_dir" = '/home/ubuntu/software'
 params."aws_source_cred" = '/home/ubuntu/.aws_batch'
 
 def proc_git = "git -C $baseDir rev-parse HEAD".execute()
