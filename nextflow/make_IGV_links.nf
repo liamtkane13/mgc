@@ -51,8 +51,8 @@ process s3_sync {
 
     input:
     val(dir) from tmp_dir
-    file(bam) from params."bam"
-    file(ref) from params."ref"
+    file(bam) from file(params."bam")
+    file(ref) from file(params."ref")
     file(aws_source_cred) from file(params."aws_source_cred")
 
     script:
