@@ -88,12 +88,14 @@ process write_link {
     input:
     val(dir) from s3_sync_output
     file(git_dir) from file(params."git_dir")
+    file(aws_source_cred) from file(params."aws_source_cred")
 
     output:
     file('*.txt') into write_link_output
 
     script:
     """
+    source $aws_source_cred
     python3 ${git_dir}/liam_git/utils/write_IGV_links.py -b ${dir}
     """
 }
