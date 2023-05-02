@@ -31,7 +31,10 @@ def produce_links(buck):
 				bam = i.split('\n')[0]
 			bam_files.append(bam)
 		if 'fasta' in i:
-			ref = i.split('\n')[0]    
+			if 'fai' in i:
+				continue
+			else:	
+				ref = i.split('\n')[0]    
 
 	igv_link = "http://localhost:60151/load?file=" 
 
