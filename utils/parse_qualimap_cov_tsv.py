@@ -21,7 +21,7 @@ def parse_arguments():
 def make_virus_dict():
 
     virus_dict = {} 
-    with open('/Users/liamkane/Desktop/out/full_virus_names.txt', 'r') as file:
+    with open('/home/ubuntu/liam/liam_git/utils/full_virus_names.txt', 'r') as file:
         for line in file:
             line = line.strip('\n')
             accession = line.split('|')[3]

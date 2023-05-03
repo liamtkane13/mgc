@@ -87,6 +87,6 @@ process write_tsv {
     file("*.tsv") into write_tsv_output
     script:
     """
-    python3 /Users/liamkane/software/liam_git/utils/parse_qualimap_cov_tsv.py --i ${sample_tsv} --b ${batch} --p ${s3_path}
+    python3 /home/ubuntu/liam/liam_git/utils/parse_qualimap_cov_tsv.py --i ${sample_tsv} --b ${batch} --p ${s3_path}
     """
 }     
