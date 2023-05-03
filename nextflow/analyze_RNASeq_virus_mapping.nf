@@ -10,6 +10,7 @@ def helpMessage() {
            --sample_file           File of Sample Names (one per line) to process
            --qualimap_path         Path to QualiMap Output Directories for analysis
            --run_name              Batch/run name for output tsv
+           --s3_path               s3 path for BAM files, used in constructing IGV links (e.g. 'rnaseq-2023-hlvd/march22_2023_RNASeq/virus_mapping/out/bam/')
            --out_dir          	   Output Directory (for things that aren't intermediate files to keep)
     """.stripIndent()
 }
@@ -80,11 +81,12 @@ process write_tsv {
     input:
     file(sample_tsv) from write_tsv_input
     val(batch) from params."run_name"
+    val(s3_path) from params."s3_path"
 
     output:
     file("*.tsv") into write_tsv_output
     script:
     """
-    python3 /Users/liamkane/software/liam_git/utils/parse_qualimap_cov_tsv.py --i ${sample_tsv} --b ${batch}
+    python3 /Users/liamkane/software/liam_git/utils/parse_qualimap_cov_tsv.py --i ${sample_tsv} --b ${batch} --p ${s3_path}
     """
 }     
