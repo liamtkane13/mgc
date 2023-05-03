@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
-for `i in ls *16gb*krona | cut -f 1 -d '-'`;
+for i in `ls *16gb*krona | cut -f 1 -d '-'`;
 do
-printf ${i}\n
+ktImportText ${i}*16gb*krona -o ${i}-kraken.html
+aws s3 cp ${i}-kraken.html s3://mgc-minion/mgc_qc/kraken/
 done
