@@ -3,6 +3,7 @@
 # parse_krona_into_tsv.py
 
 import argparse
+import pandas as pd
 
 
 def parse_arguments():
@@ -30,6 +31,8 @@ def parse_html(file):
 					split_counts = counts.split('val>')[1].rstrip('</')
 					my_dict[sample_name][node_name] = split_counts	
 	print(my_dict)
+	df = pd.DataFrame.from_dict(my_dict, orient='columns')	
+	print(df)
 
 
 
