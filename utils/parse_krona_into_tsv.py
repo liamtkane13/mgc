@@ -9,12 +9,14 @@ import pandas as pd
 def parse_arguments():
     parser = argparse.ArgumentParser(description='Input the Qualimap derived Coverage TSV')
     parser.add_argument('-i', '--infile', help = 'krona plot to parse', nargs = '+', required = True, dest = 'infile')
+    parser.add_argument('-o', '--outfile', help = 'name of file to write to', required = True, dest = 'outfile')
     args = parser.parse_args()
     infile = args.infile
-    return infile
+    outfile = args.outfile
+    return infile, outfile
 
 
-def parse_html(file):
+def parse_html(file, out):
 	my_dict = {}
 	counter = 0
 	for i in file:
@@ -33,12 +35,15 @@ def parse_html(file):
 	print(my_dict)
 	df = pd.DataFrame.from_dict(my_dict, orient='columns')	
 	print(df)
+	out_name = (f'{out}_kraken_abundances.tsv')
+	df.to_csv(out_name, sep='\t', header=True, index=True)
+
 
 
 
 def main():
-	infile = parse_arguments()
-	parse_html(infile)
+	infile, outfile = parse_arguments()
+	parse_html(infile, outfile)
 
 if __name__ == '__main__':
 	main()				    
