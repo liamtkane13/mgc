@@ -32,9 +32,8 @@ def parse_html(file, out):
 					counts = (next(file)) 
 					split_counts = counts.split('val>')[1].rstrip('</')
 					my_dict[sample_name][node_name] = split_counts	
-	print(my_dict)
+
 	df = pd.DataFrame.from_dict(my_dict, orient='columns')	
-	print(df)
 	out_name = (f'{out}_kraken_abundances.tsv')
 	df.to_csv(out_name, sep='\t', header=True, index=True)
 
