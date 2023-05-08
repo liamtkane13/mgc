@@ -9,7 +9,7 @@ def helpMessage() {
            --bam                   Path to BAM Files 
            --out_dir          	   Output Directory (for things that aren't intermediate files to keep)
         Optional arguments:
-           --bed                   Path to BED file, if wanted  
+           --locus                 Locus to focus on for IGV  
            --git_dir               Github Directory (e.g. '~/software/mgc/') 
     """.stripIndent()
 }
@@ -18,6 +18,7 @@ def helpMessage() {
 params."git_dir" = '/home/ubuntu/software'
 params."aws_source_cred" = '/home/ubuntu/.aws_batch'
 params."out_dir" = 'out/'
+params."locus" = 'false'
 
 def proc_git = "git -C $baseDir rev-parse HEAD".execute()
 version = proc_git.text.trim()
@@ -89,13 +90,20 @@ process write_link {
     val(dir) from s3_sync_output
     file(git_dir) from file(params."git_dir")
     file(aws_source_cred) from file(params."aws_source_cred")
+    val(locus) from params."locus"
 
     output:
     file('*.txt') into write_link_output
 
     script:
     """
-    source $aws_source_cred
-    python3 ${git_dir}/liam_git/utils/write_IGV_links.py -b ${dir}
+    if (${locus} == 'false') 
+    then
+        source $aws_source_cred
+        python3 ${git_dir}/liam_git/utils/write_IGV_links.py -b ${dir}
+    else
+        source $aws_source_cred
+        python3 ${git_dir}/liam_git/utils/write_IGV_links_with_locus.py -b ${dir} -l ${locus}
+    fi    
     """
 }
