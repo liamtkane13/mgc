@@ -69,7 +69,8 @@ process pull_fastq_files {
     file(kann_mongo_cred) from file(params."kann_mongo_cred")
 
     output:
-    set val(rsp), stdout into fastq_files
+    val(rsp) into sample_id 
+    stdout into fastq_files
 
     script:
     """
