@@ -6,8 +6,6 @@
 
 import argparse
 from pymongo import MongoClient
-from dotenv import load_dotenv
-from pathlib import Path
 import os
 import re 
 
@@ -19,8 +17,6 @@ def parse_arguments():
 	return accession
 
 def connect_to_mongo():
-#	dotenv_path = Path('/Users/liamkane/tokens/kannapedia_mongo_credentials')
-#	load_dotenv(dotenv_path=dotenv_path)
 
 	mongo = MongoClient(os.environ['MONGO_HOST'],
 			username = 'kannapedia',
@@ -35,8 +31,7 @@ def connect_to_mongo():
 def query_mongo(rsp, collect):
 
 	for i in collect.find({"_id":rsp}):
-		print(i['fastq_link'][0])
-		print(i['fastq_link'][1])
+		print({f"i['fastq_link'][0]}, {i['fastq_link'][1]}")
 
 def main():
 	infile = parse_arguments()
