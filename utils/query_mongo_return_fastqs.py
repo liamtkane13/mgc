@@ -33,8 +33,8 @@ def query_mongo(rsp, collect):
 	for i in collect.find({"_id":rsp}):
 		link_1 = {i['fastq_link'][0]} 
 		link_2 = {i['fastq_link'][1]}
-		processed_link_1 = link_1.lstrip('https://mgcdata.s3.amazonaws.com')
-		processed_link_2 = link_2.lstrip('https://mgcdata.s3.amazonaws.com')
+		processed_link_1 = link_1.split('https://mgcdata.s3.amazonaws.com')[1]
+		processed_link_2 = link_2.split('https://mgcdata.s3.amazonaws.com')[1]
 		final_link_1 = ('s3://mgcdata' + processed_link_1)
 		final_link_2 = ('s3://mgcdata' + processed_link_2)
 		print(final_link_1, final_link_2)
