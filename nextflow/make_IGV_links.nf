@@ -108,6 +108,6 @@ process write_link {
     script:
     """
     source $aws_source_cred
-    python3 ${git_dir}/liam_git/utils/write_IGV_links_with_locus.py -b ${dir} -l ${locus} 
+    python3 ${git_dir}/liam_git/utils/write_IGV_links.py -b ${dir} -l ${locus} 
     """
 }
