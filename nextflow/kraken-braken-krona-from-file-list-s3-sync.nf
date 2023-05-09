@@ -79,7 +79,8 @@ process pull_fastq_files {
 
 } 
 
-fastq_files 
+fastq_files
+    .trim() 
     .view()
 
 /*
