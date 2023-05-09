@@ -64,7 +64,7 @@ process pull_fastq_files {
 
     input:
     val(rsp) from rsps 
-    file(git_dir) from params."git_dir"
+    file(git_dir) from file(params."git_dir")
 
     output:
     set val(rsp), stdout into fastq_files
