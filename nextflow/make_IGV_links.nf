@@ -92,7 +92,7 @@ locus_1
 
 process write_link {
 
-    publishDir "${params.out_dir}" +'/', mode: 'copy', overwrite: false, pattern: "*"
+    publishDir "${params.out_dir}" +'/', mode: 'copy', overwrite: true, pattern: "*"
 
     container 'liamtkane/python_aws'
 
@@ -100,7 +100,6 @@ process write_link {
     val(dir) from s3_sync_output
     file(git_dir) from file(params."git_dir")
     file(aws_source_cred) from file(params."aws_source_cred")
-    //val(locus) from params."locus"
     val(locus) from locus_2
 
     output:
@@ -108,7 +107,7 @@ process write_link {
 
     script:
     """
-    if (${locus} == 'false') 
+    if (${locus} == false) 
     then
         source $aws_source_cred
         python3 ${git_dir}/liam_git/utils/write_IGV_links.py -b ${dir}
