@@ -80,6 +80,16 @@ process s3_sync {
     """
 }
 
+locus_test = Channel.from(params."locus")
+
+locus_test.into{
+    locus_1
+    locus_2
+}
+
+locus_1
+    .view()
+
 process write_link {
 
     publishDir "${params.out_dir}" +'/', mode: 'copy', overwrite: false, pattern: "*"
@@ -90,7 +100,8 @@ process write_link {
     val(dir) from s3_sync_output
     file(git_dir) from file(params."git_dir")
     file(aws_source_cred) from file(params."aws_source_cred")
-    val(locus) from params."locus"
+    //val(locus) from params."locus"
+    val(locus) from locus_2
 
     output:
     file('*.txt') into write_link_output
