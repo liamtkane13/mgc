@@ -20,6 +20,7 @@ params."kraken2_db_dir" = '/NGS/Kraken-DB/k2_pluspfp_16gb_20220908/'
 params."kmer_size"      = 100
 params."plot_name"      = 'kraken2'
 params."git_dir"   = '/home/ubuntu/software/liam_git'
+params."kann_mongo_cred" = '/home/ubuntu/.kannapedia_mongo_credentials'
 
 def proc_git = "git -C $baseDir rev-parse HEAD".execute()
 version = proc_git.text.trim()
@@ -65,12 +66,14 @@ process pull_fastq_files {
     input:
     val(rsp) from rsps 
     file(git_dir) from file(params."git_dir")
+    file(kann_mongo_cred) from file(params."kann_mongo_cred")
 
     output:
     set val(rsp), stdout into fastq_files
 
     script:
     """
+    source ${kann_mongo_cred}
     python3 ${git_dir}/utils/query_mongo_return_fastqs.py -a ${rsp}
     """
 

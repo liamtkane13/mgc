@@ -19,8 +19,8 @@ def parse_arguments():
 	return accession
 
 def connect_to_mongo():
-	dotenv_path = Path('/Users/liamkane/tokens/kannapedia_mongo_credentials')
-	load_dotenv(dotenv_path=dotenv_path)
+#	dotenv_path = Path('/Users/liamkane/tokens/kannapedia_mongo_credentials')
+#	load_dotenv(dotenv_path=dotenv_path)
 
 	mongo = MongoClient(os.environ['MONGO_HOST'],
 			username = 'kannapedia',
