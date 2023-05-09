@@ -10,11 +10,13 @@ from subprocess import check_output as run
 def parse_arguments():
     parser = argparse.ArgumentParser(description='Input the corresponding s3 path for IGV Link creation')
     parser.add_argument('-b', '--bucket', help = 's3 bucket for analysis', required = True, dest = 'bucket')
+    parser.add_argument('-l', '--locus', help = 'Locus for use in IGV Link', required = True, dest = 'locus')
     args = parser.parse_args()
     bucket = args.bucket
-    return bucket
+    locus = args.locus
+    return bucket, locus
 
-def produce_links(buck):
+def produce_links(buck, lo):
 	
 	ls_command = (f'aws s3 ls s3://mgcdata/shared/igv-links/tmp/{buck}/')
 	ls_output = (run(['bash', '-c', ls_command])).decode('utf8').rstrip('\n')
@@ -45,7 +47,10 @@ def produce_links(buck):
 		else:
 			file_link = (f',https://mgcdata.s3.amazonaws.com/shared/igv-links/tmp/{buck}/{file}')
 		igv_link = igv_link + file_link
-	end_of_link = (f"&genome=https://mgcdata.s3.amazonaws.com/shared/igv-links/tmp/{buck}/{ref}")
+	if lo != 'false':	
+		end_of_link = (f"&genome=https://mgcdata.s3.amazonaws.com/shared/igv-links/tmp/{buck}/{ref}&locus={lo}")
+	else:
+		end_of_link = (f"&genome=https://mgcdata.s3.amazonaws.com/shared/igv-links/tmp/{buck}/{ref}")	
 	final_igv_link = igv_link + end_of_link
 
 	with open('igv_link.txt', 'w') as outfile:
@@ -55,8 +60,8 @@ def produce_links(buck):
 
 
 def main():
-	bucket = parse_arguments()
-	produce_links(bucket)
+	bucket, locus = parse_arguments()
+	produce_links(bucket, locus)
 
 if __name__ == '__main__':
 	main()	
