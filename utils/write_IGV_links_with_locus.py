@@ -47,7 +47,10 @@ def produce_links(buck, lo):
 		else:
 			file_link = (f',https://mgcdata.s3.amazonaws.com/shared/igv-links/tmp/{buck}/{file}')
 		igv_link = igv_link + file_link
-	end_of_link = (f"&genome=https://mgcdata.s3.amazonaws.com/shared/igv-links/tmp/{buck}/{ref}&locus={lo}")
+	if lo != 'false':	
+		end_of_link = (f"&genome=https://mgcdata.s3.amazonaws.com/shared/igv-links/tmp/{buck}/{ref}&locus={lo}")
+	else:
+		end_of_link = (f"&genome=https://mgcdata.s3.amazonaws.com/shared/igv-links/tmp/{buck}/{ref}")	
 	final_igv_link = igv_link + end_of_link
 
 	with open('igv_link.txt', 'w') as outfile:
