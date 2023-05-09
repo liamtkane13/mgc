@@ -31,7 +31,7 @@ def connect_to_mongo():
 def query_mongo(rsp, collect):
 
 	for i in collect.find({"_id":rsp}):
-		print({f"i['fastq_link'][0]}, {i['fastq_link'][1]}")
+		print(f"{i['fastq_link'][0]}, {i['fastq_link'][1]}")
 
 def main():
 	infile = parse_arguments()
