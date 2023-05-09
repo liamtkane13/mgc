@@ -85,7 +85,7 @@ process pull_fastq_files {
    container 'liamtkane/python_aws'
    
    input:
-   set val(rsp), val(fq1), val(fq2) from print_fastq_file_paths
+   set val(rsp), val(fq1), val(fq2) from fastq_file_paths
    file(aws_source_cred) from file(params."aws_source_cred")
 
 
