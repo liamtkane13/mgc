@@ -21,6 +21,7 @@ params."kmer_size"      = 100
 params."plot_name"      = 'kraken2'
 params."git_dir"   = '/home/ubuntu/software/liam_git'
 params."kann_mongo_cred" = '/home/ubuntu/.kannapedia_mongo_credentials'
+params."aws_source_cred" = '/home/ubuntu/.aws_batch'
 
 def proc_git = "git -C $baseDir rev-parse HEAD".execute()
 version = proc_git.text.trim()
@@ -59,7 +60,7 @@ rsps
    .set{rsps}
 
 
-process pull_fastq_files {
+process print_fastq_file_paths {
 
     container 'liamtkane/python_aws'
 
@@ -69,7 +70,7 @@ process pull_fastq_files {
     file(kann_mongo_cred) from file(params."kann_mongo_cred")
 
     output:
-    set val(rsp), stdout into fastq_files
+    set val(rsp), stdout into fastq_file_paths
 
     script:
     """
@@ -79,9 +80,25 @@ process pull_fastq_files {
 
 } 
 
-fastq_files
- //   .trim() 
-    .view()
+process pull_fastq_files {
+
+   container 'liamtkane/python_aws'
+   
+   input:
+   set val(rsp), val(fq1), val(fq2) from print_fastq_file_paths
+   file(aws_source_cred) from file(params."aws_source_cred")
+
+
+   output:
+   set val(rsp), file('*R1_001.fastq.gz'), file('*R2_001.fastq.gz') into fastq_file_paths
+
+   script:
+   """
+   source $aws_source_cred
+   aws s3 cp ${fq1} .
+   aws s3 cp ${fq2} .
+   """
+}
 
 /*
 
