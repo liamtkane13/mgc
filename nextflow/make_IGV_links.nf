@@ -107,13 +107,7 @@ process write_link {
 
     script:
     """
-    if (${locus} == 'false') 
-    then
-        source $aws_source_cred
-        python3 ${git_dir}/liam_git/utils/write_IGV_links.py -b ${dir}
-    else
-        source $aws_source_cred
-        python3 ${git_dir}/liam_git/utils/write_IGV_links_with_locus.py -b ${dir} -l ${locus}
-    fi    
+    source $aws_source_cred
+    python3 ${git_dir}/liam_git/utils/write_IGV_links_with_locus.py -b ${dir} -l ${locus} 
     """
 }
