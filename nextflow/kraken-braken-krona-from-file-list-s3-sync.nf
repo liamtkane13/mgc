@@ -74,7 +74,7 @@ process pull_fastq_files {
     script:
     """
     source ${kann_mongo_cred}
-    python3 ${git_dir}/utils/query_mongo_return_fastqs.py -a ${rsp}
+    python3 ${git_dir}/utils/query_mongo_return_fastqs.py -a ${rsp} | sed -z "s/\n//g"  
     """
 
 } 
