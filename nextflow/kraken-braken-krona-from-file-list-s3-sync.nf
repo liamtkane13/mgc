@@ -250,7 +250,7 @@ process make_krona_plot {
     set val(sample_id), file(krona_file) from krona_input
 
     output:
-    set val(id_run), file("*.html") into krona_output
+    file("*.html") into krona_output
 
     script:
     """
