@@ -8,7 +8,7 @@ def helpMessage() {
     Usage:
 
        Mandatory arguments:
-           --file              File with RSPs to run kraken on 
+           --rsp_file              File with RSPs to run kraken on 
        Optional arguments:
            --out_dir        Output Directory (for things that aren't intermediate files to keep)
     """.stripIndent()
@@ -173,7 +173,7 @@ process kraken2 {
     """
 }
 
-/*
+
 /////// Krona for species ////////
 
 process bracken_species {
@@ -233,4 +233,28 @@ process bracken_species_to_krona {
     	-o ${id_run}-${db_name}-${kmer_size}-species.krona
     """
 }
-*/
+
+bracken_species_to_krona_out
+    .map {it -> [it[0], it[3]]}
+    .set {krona_input}
+
+process make_krona_plot {
+
+    publishDir params."out_dir" + '/kraken2-krona-species/', mode: 'copy', overwrite: true, pattern: '*.html'
+
+    tag {'bracken_species_to_krona' + '-' + id_run}
+
+//    container 'medicinalgenomics/kraken-braken-krona:latest'
+
+    input:
+    set val(sample_id), file(krona_file) from krona_input
+
+    output:
+    set val(id_run), file("*.html") into krona_output
+
+    script:
+    """
+    ktImportText ${krona_file} \
+        -o ${sample_id}.html
+    """ 
+}
