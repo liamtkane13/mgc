@@ -258,3 +258,18 @@ process make_krona_plot {
         -o ${sample_id}.html
     """ 
 }
+
+process s3_sync {
+
+    container 'liamtkane/python_aws'
+
+    input:
+    file(aws_source_cred) from file(params."aws_source_cred")
+    file(krona_plot) from krona_output
+
+    script:
+    """
+    source $aws_source_cred
+    aws s3 cp ${krona_plot} s3://mgc-minion/mgc_qc/kraken/
+    """
+}
