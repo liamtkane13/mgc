@@ -71,7 +71,7 @@ process print_fastq_file_paths {
 
     output:
     val(rsp) into rsp_out
-    set val('*R1_001.fastq.gz'), val('*R2_001.fastq.gz') into fastq_file_paths
+    stdout into fastq_file_paths
 
     script:
     """
@@ -82,7 +82,7 @@ process print_fastq_file_paths {
 } 
 
 fastq_file_paths
-    .map{it -> [it[0], it[1]]}
+    .map {it -> it.split(/\,/)}
     .set {fastq_paths}
 
 process pull_fastq_files {
