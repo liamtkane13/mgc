@@ -43,7 +43,6 @@ process read_rsp_file {
 
     input:
     file(rsp_file) from file(params."rsp_file")
-    //file(rsps_txt) from file('rsps.txt')
 
     output:
     stdout into rsps
@@ -82,7 +81,7 @@ process print_fastq_file_paths {
 } 
 
 fastq_file_paths
-    .map {it -> it.split(/\,/)}
+    .map {it -> it.split(/\,/).collect()}
     .view()
     .set {fastq_paths}
 
