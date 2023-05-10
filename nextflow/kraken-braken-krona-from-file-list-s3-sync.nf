@@ -106,7 +106,7 @@ process pull_fastq_files {
    """
 }
 
-/*
+
 
 kraken2_db_file_list = Channel.from(['/NGS/Kraken-DB/k2_pluspfp_16gb_20220908/'])
 
@@ -126,7 +126,7 @@ kraken2_db2
 
 
 
-trim_galore_input_flat
+fastq_files 
 	.combine(kraken2_db1)
 	.set {kraken2_input}
 
@@ -173,6 +173,7 @@ process kraken2 {
     """
 }
 
+/*
 /////// Krona for species ////////
 
 process bracken_species {
