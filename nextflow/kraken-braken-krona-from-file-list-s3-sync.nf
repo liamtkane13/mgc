@@ -255,7 +255,7 @@ process make_krona_plot {
     script:
     """
     ktImportText ${krona_file} \
-        -o ${sample_id}.html
+        -o ${sample_id}-kraken.html
     """ 
 }
 
