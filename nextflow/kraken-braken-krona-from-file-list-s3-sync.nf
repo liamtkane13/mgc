@@ -96,7 +96,7 @@ process pull_fastq_files {
 
 
    output:
-   set val(rsp), file('*R1_001.fastq.gz'), file('*R2_001.fastq.gz') into fastq_files
+   set val(rsp), file('*R1_001.fastq.gz'), val('*R2_001.fastq.gz') into fastq_files
 
    script:
    """
