@@ -83,6 +83,7 @@ process print_fastq_file_paths {
 
 fastq_file_paths
     .map {it -> it.split(/\,/)}
+    .view()
     .set {fastq_paths}
 
 process pull_fastq_files {
