@@ -71,7 +71,7 @@ process print_fastq_file_paths {
 
     output:
     val(rsp) into rsp_out
-    set val('*R1_001.fastq.gz'), file('*R2_001.fastq.gz') into fastq_file_paths
+    set val('*R1_001.fastq.gz'), val('*R2_001.fastq.gz') into fastq_file_paths
 
     script:
     """
@@ -96,7 +96,7 @@ process pull_fastq_files {
 
 
    output:
-   set val(rsp), file('*R1_001.fastq.gz'), val('*R2_001.fastq.gz') into fastq_files
+   set val(rsp), file('*R1_001.fastq.gz'), file('*R2_001.fastq.gz') into fastq_files
 
    script:
    """
