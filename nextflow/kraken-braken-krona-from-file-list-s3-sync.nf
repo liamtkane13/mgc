@@ -70,7 +70,8 @@ process print_fastq_file_paths {
     file(kann_mongo_cred) from file(params."kann_mongo_cred")
 
     output:
-    set val(rsp), stdout into fastq_file_paths
+    val(rsp) into rsp_out
+    stdout into fastq_file_paths
 
     script:
     """
@@ -80,12 +81,17 @@ process print_fastq_file_paths {
 
 } 
 
+fastq_file_paths
+    .map{it -> [it[0], it[1]]}
+    .set {fastq_paths}
+
 process pull_fastq_files {
 
    container 'liamtkane/python_aws'
    
    input:
-   set val(rsp), val(fq1), val(fq2) from fastq_file_paths
+   val(rsp) from rsp_out 
+   set val(fq1), val(fq2) from fastq_paths
    file(aws_source_cred) from file(params."aws_source_cred")
 
 
