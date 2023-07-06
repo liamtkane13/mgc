@@ -6,8 +6,8 @@ from Bio import SeqIO
 
 def parse_arguments():
 
-    parser = argparse.ArgumentParser(description='Input the FASTA file to be split')
-    parser.add_argument('-f', '--file', help = 'FASTA file to butcher', required = True, dest = 'infile')
+	parser = argparse.ArgumentParser(description='Input the FASTA file to be split')
+	parser.add_argument('-f', '--file', help = 'FASTA file to butcher', required = True, dest = 'infile')
 	args = parser.parse_args()
 	infile = args.infile 
 	
