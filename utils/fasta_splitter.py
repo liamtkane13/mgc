@@ -18,7 +18,6 @@ def parse_arguments():
 
 
 def split_fasta(file, tag):
-
 	
 	for record in SeqIO.parse(file, 'fasta'):
 		
@@ -41,7 +40,6 @@ def split_fasta(file, tag):
 			with open(accession_id, 'w') as outfile:
 				SeqIO.write(record, outfile, "fasta")			
 			outfile.close()		
-
 
 
 def main():
