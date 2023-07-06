@@ -2,6 +2,7 @@
 
 # fasta_splitter.py
 
+import argparse
 from Bio import SeqIO 
 
 def parse_arguments():
