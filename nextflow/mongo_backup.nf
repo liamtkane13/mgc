@@ -12,6 +12,7 @@ def helpMessage() {
 }
 
 params."aws_source_cred" = '/home/ubuntu/.aws_batch'
+params."git_dir" = '/home/ubuntu/software/mgc/'
 
 def proc_git = "git -C $baseDir rev-parse HEAD".execute()
 version = proc_git.text.trim()
@@ -67,4 +68,17 @@ process s3_sync {
 	source $aws_source_cred 
 	aws s3 sync ${backup_dir} s3://mgcdata/backup/mongodb/bson/${date}/
 	""" 
+}
+
+process delete_old_backup {
+
+	container 'liamtkane/python_aws'
+
+	input:
+	file(git_dir) from file(params."git_dir")
+
+	script:
+	"""
+	python3 ${git_dir}/utils/delete_old_mongo_backup.py
+	"""
 }
