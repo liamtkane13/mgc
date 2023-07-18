@@ -38,6 +38,8 @@ process get_date {
 
 process perform_backup {
 
+	container 'library/mongo:latest'
+
 	input:
 	file(pw_file) from file(params."f")
 	val(backup_date) from date_output
@@ -58,12 +60,11 @@ process s3_sync {
 
 	input:
 	set val(date), file(backup_dir) from backup_output
-//	file(aws_source_cred) from file(params."aws_source_cred")	
+	file(aws_source_cred) from file(params."aws_source_cred")	
 
 	script:
-	/*"""
-	 source $aws_source_cred */
-	""" 
+	"""
+	source $aws_source_cred 
 	aws s3 sync ${backup_dir} s3://mgcdata/backup/mongodb/bson/${date}/
 	""" 
 }
