@@ -76,9 +76,11 @@ process delete_old_backup {
 
 	input:
 	file(git_dir) from file(params."git_dir")
+	file(aws_source_cred) from file(params."aws_source_cred")
 
 	script:
 	"""
+	source $aws_source_cred
 	python3 ${git_dir}/utils/delete_old_mongo_backup.py
 	"""
 }
