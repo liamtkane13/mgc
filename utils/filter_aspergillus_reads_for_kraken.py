@@ -35,7 +35,7 @@ def filter_fastqs(files, length, qual):
 
 				output_file = (f'{file_name}_filtered_by_{length}_length_{qual}_quality.fastq')
 				
-				if min(rec.letter_annotations["phred_quality"]) >= qual and len(rec.seq) >= length:
+				if mean(rec.letter_annotations["phred_quality"]) >= qual and len(rec.seq) >= length:
 					print(rec)
 					filtered_seqs.append(rec)
 
