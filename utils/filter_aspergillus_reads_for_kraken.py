@@ -31,31 +31,34 @@ def filter_fastqs(files, length, qual):
 				
 				qual = int(qual)
 				length = int(length)
+
+				output_file = (f'{file_name}_filtered_by_{length}_length_{qual}_quality.fastq')
 				
 				if min(rec.letter_annotations["phred_quality"]) >= qual and len(rec.seq) >= length:
 					print(rec)
 					filtered_seqs.append(rec)
-					output_file = (f'{file_name}_filtered_by_{length}_length_{qual}_quality.fastq')
 
 
 			elif qual != None and length == None:
 
 				qual = int(qual)
 
+				output_file = (f'{file_name}_filtered_by_{qual}_quality.fastq')
+
 				if min(rec.letter_annotations["phred_quality"]) >= qual:
 					print(rec)	
 					filtered_seqs.append(rec)
-					output_file = (f'{file_name}_filtered_by_{qual}_quality.fastq')
 
 
 			elif length != None and qual == None:
 
 				length = int(length)
 
+				output_file = (f'{file_name}_filtered_by_{length}_length.fastq')
+
 				if len(rec.seq) >= length:
 					print(rec)	
 					filtered_seqs.append(rec)
-					output_file = (f'{file_name}_filtered_by_{length}_length.fastq')
 
 		SeqIO.write(filtered_seqs, output_file, "fastq")	
 						
