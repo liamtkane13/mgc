@@ -5,6 +5,7 @@
 from subprocess import check_output as run
 import argparse
 from Bio import SeqIO
+from statistics import mean
 
 def parse_arguments():
     parser = argparse.ArgumentParser(description='Input (a) FASTQ file(s) to filter')
@@ -45,7 +46,7 @@ def filter_fastqs(files, length, qual):
 
 				output_file = (f'{file_name}_filtered_by_{qual}_quality.fastq')
 
-				if min(rec.letter_annotations["phred_quality"]) >= qual:
+				if mean(rec.letter_annotations["phred_quality"]) >= qual:
 					print(rec)	
 					filtered_seqs.append(rec)
 
