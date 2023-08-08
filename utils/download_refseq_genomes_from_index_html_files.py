@@ -3,7 +3,7 @@
 # download_refseq_genomes_from_index_html_files.py
 
 import argparse
-from subproess import check_output as run 
+from subprocess import check_output as run 
 
 def parse_arguments():
     parser = argparse.ArgumentParser(description='Input (a) FASTQ file(s) to filter')
@@ -15,9 +15,14 @@ def parse_arguments():
 def download_genomes(files):
 
 	for file in files:
-		for line in file:
-			if 'href' in line:
-				print(line)
+		with open(file, 'r') as file:
+			for line in file:
+				if "href" in line:
+					link = line.split('"')[1]
+#					print(link)
+		download_command = (f'wget {link}/*fna.gz')
+		print(download_command)
+		run(['bash', '-c', download_command])	
 
 def main():
 	infiles = parse_arguments()
