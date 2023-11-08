@@ -9,10 +9,12 @@ import re
 
 def parse_arguments():
 	parser = argparse.ArgumentParser(description='Input BLAST output file, to be filtered by best hit per contig')
-	parser.add_argument('-a', '--accession', help = 'RSP to query', required = True, dest = 'accession')
+	parser.add_argument('-r1', '--rsp_1', help = 'RSP 1 to query', required = True, dest = 'rsp_1')
+	parser.add_argument('-r2', '--rsp_2', help = 'RSP 2 to query', required = True, dest = 'rsp_2')
 	args = parser.parse_args()
-	accession = args.accession
-	return accession
+	rsp_1 = args.rsp_1
+	rsp_2 = args.rsp_2
+	return rsp_1, rsp_2
 
 def connect_to_mongo():
 
@@ -25,3 +27,4 @@ def connect_to_mongo():
 	collection = database['SS2']
 	return collection 
 
+def compare_variants(rsp1, rsp2):
