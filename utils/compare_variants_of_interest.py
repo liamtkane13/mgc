@@ -1,8 +1,6 @@
 #!/usr/bin/eny python3
 
-# compare_variants_of_interest.py
-
-# This script was written to compare variants of RSP 1 with its lower coverage counterpart, RSP 2. As such, this script only checks which variants are in RSP 1, but not RSP 2. Update this for more use cases. 
+# compare_variants_of_interest.py 
 
 import argparse
 from pymongo import MongoClient
@@ -34,36 +32,39 @@ def connect_to_mongo():
 
 def compare_variants(rsp1, rsp2, collect):
 
-	rsp1_list = []
-	rsp2_list = []
 
 	for i in collect.find({'_id':rsp1}):
 
 		rsp1_var = i['kannapedia_variants']
-		
-		for it in rsp1_var:
-			var = it['HGVSc']
-			rsp1_list.append(var)	
 
 	for i in collect.find({'_id':rsp2}):
 
-		rsp2_var = i['kannapedia_variants']
-		
-		for it in rsp2_var:
-			var = it['HGVSc']
-			rsp2_list.append(var)		
+		rsp2_var = i['kannapedia_variants']	
 
 	rsp1_df = pd.DataFrame.from_dict(rsp1_var)
 	rsp2_df = pd.DataFrame.from_dict(rsp2_var)
+
 	print(rsp1_df)
 	print(rsp2_df)
-#	print(rsp1_list)
-#	print(rsp2_list)
 
 	rsp1_only_var = (rsp1_df[~rsp1_df.HGVSc.isin(rsp2_df.HGVSc)])
 	rsp2_only_var = (rsp2_df[~rsp2_df.HGVSc.isin(rsp1_df.HGVSc)])
+	overlap_df = (rsp1_df[rsp1_df.HGVSc.isin(rsp2_df.HGVSc)])
+	
 	print(rsp1_only_var)
 	print(rsp2_only_var)
+	print(overlap_df)
+
+
+	file1 = (f'variants_unique_to_{rsp1}_vs_{rsp2}.tsv')
+	file2 = (f'variants_unique_to_{rsp2}_vs_{rsp1}.tsv')
+	overlap_file = (f'{rsp1}_{rsp2}_shared_variants.tsv')
+
+	rsp1_df.to_csv(file1, sep='\t')
+	rsp2_df.to_csv(file2, sep='\t')	
+	overlap_df.to_csv(overlap_file, sep='\t')
+
+
 
 
 def main():
