@@ -44,16 +44,19 @@ def compare_variants(rsp1, rsp2, collect):
 	rsp1_df = pd.DataFrame.from_dict(rsp1_var)
 	rsp2_df = pd.DataFrame.from_dict(rsp2_var)
 
-	print(rsp1_df)
-	print(rsp2_df)
+#	print(rsp1_df)
+#	print(rsp2_df)
 
 	rsp1_only_var = (rsp1_df[~rsp1_df.HGVSc.isin(rsp2_df.HGVSc)])
 	rsp2_only_var = (rsp2_df[~rsp2_df.HGVSc.isin(rsp1_df.HGVSc)])
 	overlap_df = (rsp1_df[rsp1_df.HGVSc.isin(rsp2_df.HGVSc)])
 	
-	print(rsp1_only_var)
-	print(rsp2_only_var)
-	print(overlap_df)
+#	print(rsp1_only_var)
+#	print(rsp2_only_var)
+#	print(overlap_df)
+	rsp1_only_var_len = len(rsp1_only_var)
+	rsp2_only_var_len = len(rsp2_only_var)
+	overlapped_var_len = len(overlap_df)
 
 
 	file1 = (f'variants_unique_to_{rsp1}_vs_{rsp2}.tsv')
@@ -63,6 +66,9 @@ def compare_variants(rsp1, rsp2, collect):
 	rsp1_df.to_csv(file1, sep='\t')
 	rsp2_df.to_csv(file2, sep='\t')	
 	overlap_df.to_csv(overlap_file, sep='\t')
+	print(f'{rsp1}_only_variants: {rsp1_only_var_len}')
+	print(f'{rsp2}_only_variants: {rsp2_only_var_len}')
+	print(f'Shared_variants: {overlapped_var_len}')
 
 
 
