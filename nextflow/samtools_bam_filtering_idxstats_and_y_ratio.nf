@@ -31,6 +31,8 @@ bam_files = Channel.fromPath(params."bam")
                                     .map {it -> [it.simpleName, it]}    
 
 
+
+
 process filter_bam_files {
 
     publishDir params."out_dir", mode: 'copy', overwrite: true, pattern: '*-idxstats.tsv'
@@ -50,12 +52,19 @@ process filter_bam_files {
     """
 }
 
+filter_bam_files_output
+    .collect()
+    .view()
+    .set {filter_bam_files_output_1}
+
+
+
 process calculate_y_ratio {
 
     publishDir params."out_dir", mode: 'copy', overwrite: true, pattern: 'y-ratios.txt'
 
     input:
-    file(idxstats) from filter_bam_files_output
+    file(idxstats) from filter_bam_files_output_1
     file(git_dir) from file(params."git_dir")
 
     output:
@@ -64,5 +73,24 @@ process calculate_y_ratio {
     script:
     """
     python3 ${git_dir}/utils/calculate_y_ratio_from_idxstats_output.py -i ${idxstats} >> y-ratios.txt    
+    """
+}
+
+
+
+process plot_y_ratios {
+
+    publishDir params."out_dir", mode: 'copy', overwrite: true, pattern: 'y_ratio_plot.png'
+
+    input:
+    file(y_ratios) from calculate_y_ratio_output
+    file(git_dir) from file(params."git_dir")
+
+    output:
+    file("y_ratio_plot.png") into plot_y_ratios_output
+
+    script:
+    """
+    python3 ${git_dir}/utils/plot_y_ratio.py -i ${y_ratios}
     """
 }
