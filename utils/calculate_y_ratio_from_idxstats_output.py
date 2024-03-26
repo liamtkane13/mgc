@@ -19,17 +19,19 @@ def parse_arguments():
 
 def parse_tsv_no_pandas(files):
 
-	print(f"RSP\tTotal Mapped\tTotal Y Mapped\tY Ratio")
+	print(f"RSP\tTotal Mapped\tTotal Y Mapped\tY Ratio\tFlag")
 
 	for file in files:
 
 		if '/' in file:
 
 			rsp = file.split('/')[-1].split('.')[0].split('-')[0]
+			flag = file.split('/')[-1].split('.')[0].split('-')[1]
 
 		else:	
 
 			rsp = file.split('.')[0].split('-')[0]
+			flag = 'Standard'
 	
 		with open(file, 'r') as file:
 
@@ -51,7 +53,7 @@ def parse_tsv_no_pandas(files):
 
 				y_ratio = float(total_y_mapped/total_mapped)
 
-		print(f"{rsp}\t{total_mapped}\t{total_y_mapped}\t{y_ratio}")		
+		print(f"{rsp}\t{total_mapped}\t{total_y_mapped}\t{y_ratio}\t{flag}")		
 
 	
 
