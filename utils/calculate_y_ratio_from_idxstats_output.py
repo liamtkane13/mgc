@@ -19,7 +19,7 @@ def parse_arguments():
 
 def parse_tsv_no_pandas(files):
 
-	print(f"RSP\tTotal Mapped\tTotal Y Mapped\tY Ratio\tFlag")
+	print(f"RSP\tTotal Mapped\tTotal Y Mapped\tY Ratio\tFlag\tColor")
 
 	for file in files:
 
@@ -31,7 +31,24 @@ def parse_tsv_no_pandas(files):
 		else:	
 
 			rsp = file.split('.')[0].split('-')[0]
-			flag = 'Standard'
+			pre_flag = file.split('.')[0].split('-')[1]
+			
+			if pre_flag == 'idxstats':
+				flag = 'Standard'
+			else:
+				flag = pre_flag	
+
+		if flag =='Standard':
+			
+			color = 'red'
+
+		elif flag == '256':
+			
+			color = 'green'	
+
+		else:
+
+			color = 'blue'			
 	
 		with open(file, 'r') as file:
 
@@ -53,7 +70,7 @@ def parse_tsv_no_pandas(files):
 
 				y_ratio = float(total_y_mapped/total_mapped)
 
-		print(f"{rsp}\t{total_mapped}\t{total_y_mapped}\t{y_ratio}\t{flag}")		
+		print(f"{rsp}\t{total_mapped}\t{total_y_mapped}\t{y_ratio}\t{flag}\t{color}")
 
 	
 

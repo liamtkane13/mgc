@@ -125,9 +125,6 @@ workflow {
         .flatMap {n -> n.split(/\n/).collect()}
         .set{flags} 
 
-    flags
-        .view()
-
     bam_files = Channel.fromPath(params."bam")
                                     .map {it -> [it.simpleName, it]}
                                     .combine(flags)
@@ -140,7 +137,7 @@ workflow {
         .view()
         .set {filter_bam_files_output_1}
 
-    calculate_y_ratio_output = calculate_y_ratio(filter_bam_files_output, file(params."git_dir"))
+    calculate_y_ratio_output = calculate_y_ratio(filter_bam_files_output_1, file(params."git_dir"))
 
     y_ratio_plot = plot_y_ratios(calculate_y_ratio_output) 
 }

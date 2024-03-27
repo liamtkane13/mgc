@@ -23,7 +23,7 @@ def plot_y_ratios_pandas(file):
 
 	print(y_only_df)
 
-	plot = ratio_df.plot.scatter(x='RSP', y='Y Ratio')
+	plot = ratio_df.plot.scatter(x='RSP', y='Y Ratio', c='Color')
 	fig = plot.get_figure()
 	fig.savefig("y_ratio_plot.png")
 
