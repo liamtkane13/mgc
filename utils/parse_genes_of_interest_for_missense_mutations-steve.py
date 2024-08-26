@@ -57,34 +57,23 @@ def print_out_high_impact_variants(collect, list_ob):
 	for i in collect.find({'_id':regex}):
 
 		try:
-			for it in i['kannapedia_variants']:
+			for it in i['variants']:
 				if it['Annotation_Impact'] == 'LOW':
 					continue
 				else:	
 #					print(f"{it['HGVSp']}\t{it['region_label']}")
 					queried_name = it['region_label']
-					queried_info = f'{it["Gene_Name"]}\t{it["contig"]}\t{it["contig_pos"]}'
+					#queried_info = f'{it["gene_name"]}\t{it["HGVSp"]}'
 
 					if queried_name not in queried_name_list:
 						queried_name_list.append(queried_name)
 					
-					elif queried_name not in queried_name_hash:
-							queried_name_hash[queried_name] = queried_info 
+#					elif queried_name not in queried_name_hash:
+#							queried_name_hash[queried_name] = queried_info 
 #					if queried_name in list_ob:
 #						print(queried_name)
 		except:
 			continue	
-#		for it in i['kannapedia_variants']:
-#			if it['Annotation_Impact'] == 'LOW':
-#				continue
-#			else:	
-#					print(f"{it['HGVSp']}\t{it['region_label']}")
-#				queried_name = it['region_label']
-#				queried_info = f'{it["Gene_Name"]}\t{it["HGVSp"]}'	
-#				if queried_name not in queried_name_list:
-#					queried_name_list.append(queried_name)	
-#				if queried_name not in queried_name_hash:
-#					queried_name_hash[queried_name] = queried_info 		
 
 
 

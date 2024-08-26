@@ -50,14 +50,20 @@ def compare_variants(file, collect):
 
 			for i in collect.find({'_id':rsp2}):
 
-				rsp2_var = i['kannapedia_variants']	
+				rsp2_var = i['kannapedia_variants']
 
 			rsp1_df = pd.DataFrame.from_dict(rsp1_var)
-			rsp2_df = pd.DataFrame.from_dict(rsp2_var)	
+			rsp2_df = pd.DataFrame.from_dict(rsp2_var)
 
-			rsp1_only_var = (rsp1_df[~rsp1_df.HGVSc.isin(rsp2_df.HGVSc)])
-			rsp2_only_var = (rsp2_df[~rsp2_df.HGVSc.isin(rsp1_df.HGVSc)])
-			overlap_df = (rsp1_df[rsp1_df.HGVSc.isin(rsp2_df.HGVSc)])
+			rsp1_df_filtered = rsp1_df[rsp1_df.Annotation_Impact != 'LOW']
+			rsp1_df_filtered = rsp1_df_filtered[rsp1_df_filtered.Annotation_Impact != 'MODIFIER']
+
+			rsp2_df_filtered = rsp2_df[rsp2_df.Annotation_Impact != 'LOW']
+			rsp2_df_filtered = rsp2_df_filtered[rsp2_df_filtered.Annotation_Impact != 'MODIFIER']	
+
+			rsp1_only_var = (rsp1_df_filtered[~rsp1_df_filtered.HGVSc.isin(rsp2_df_filtered.HGVSc)])
+			rsp2_only_var = (rsp2_df_filtered[~rsp2_df_filtered.HGVSc.isin(rsp1_df_filtered.HGVSc)])
+			overlap_df = (rsp1_df_filtered[rsp1_df_filtered.HGVSc.isin(rsp2_df_filtered.HGVSc)])
 				
 			rsp1_only_var_len = len(rsp1_only_var)
 			rsp2_only_var_len = len(rsp2_only_var)
@@ -72,7 +78,7 @@ def compare_variants(file, collect):
 	
 	print(output_df)	
 
-	output_df.to_csv('rsp_variant_comparison.tsv', sep='\t')		
+	output_df.to_csv('rsp_variant_comparison.tsv', sep='\t')	
 
 
 def main():
